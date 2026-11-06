@@ -26,3 +26,5 @@ export const ResetIcon = () => <Icon><polyline points="1 4 1 10 7 10"/><path d="
 export const CalculatorIcon = () => <Icon><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></Icon>;
 /** zetamath mark: a keycap holding a zeta. */
 export const LogoMark = () => <svg className="logo-mark" viewBox="0 0 44 32" aria-hidden="true"><rect x="2" y="2" width="40" height="28" rx="7" fill="none" stroke="currentColor" strokeWidth="3"/><text x="22" y="23" textAnchor="middle" fontSize="19" fontWeight="700" fill="currentColor" fontFamily="inherit">ζ</text></svg>;
+
+export const BookIcon = () => <Icon><path d="M12 5v16M12 5C9 3 5 3 2 4v16c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1z"/></Icon>;
