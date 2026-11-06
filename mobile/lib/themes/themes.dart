@@ -6,6 +6,13 @@ class ZetaTheme {
   final Color bg, main, sub, text, error;
 
   bool get isLight => bg.computeLuminance() > 0.5;
+
+  /// Secondary text that still reads at small sizes. The presets' `sub` is tuned for large
+  /// web type and falls under 4.5:1 on several backgrounds, so small labels lean towards `text`.
+  Color get muted => Color.lerp(sub, text, .35)!;
+
+  /// A raised surface for controls, one step off the background.
+  Color get raised => Color.lerp(bg, sub, .12)!;
 }
 
 /// Same 15 presets as `web/src/themes/index.ts`.
@@ -62,13 +69,19 @@ ThemeData buildTheme(ZetaTheme t, String font) {
     fontFamily: font,
     extensions: [ZetaColors(t)],
     navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: t.bg,
-      indicatorColor: t.main.withValues(alpha: .18),
+      backgroundColor: Color.lerp(t.bg, t.sub, .05),
+      surfaceTintColor: Colors.transparent,
+      indicatorColor: t.main.withValues(alpha: .22),
       iconTheme: WidgetStateProperty.resolveWith(
-        (s) => IconThemeData(color: s.contains(WidgetState.selected) ? t.main : t.sub),
+        (s) => IconThemeData(color: s.contains(WidgetState.selected) ? t.main : t.muted),
       ),
       labelTextStyle: WidgetStateProperty.resolveWith(
-        (s) => TextStyle(fontFamily: font, fontSize: 12, color: s.contains(WidgetState.selected) ? t.main : t.sub),
+        (s) => TextStyle(
+          fontFamily: font,
+          fontSize: 12,
+          fontWeight: s.contains(WidgetState.selected) ? FontWeight.w700 : FontWeight.w400,
+          color: s.contains(WidgetState.selected) ? t.main : t.muted,
+        ),
       ),
     ),
     chipTheme: ChipThemeData(

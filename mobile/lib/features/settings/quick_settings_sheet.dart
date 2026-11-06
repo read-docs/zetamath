@@ -5,16 +5,25 @@ import '../../store/difficulty.dart';
 import '../../store/history.dart';
 import '../../store/settings.dart';
 import '../../themes/themes.dart';
+import '../common/segmented.dart';
 import '../common/widgets.dart';
+import '../practice/mode_bar.dart';
 import '../practice/practice_providers.dart';
 
-/// The touch stand-in for web's Esc command palette: mode, length, difficulty and theme.
+/// The touch stand-in for web's Esc command palette: what kind of test, how long, how hard, and the theme.
 Future<void> showQuickSettings(BuildContext context) => showModalBottomSheet<void>(
   context: context,
   showDragHandle: true,
   isScrollControlled: true,
   builder: (_) => const QuickSettingsSheet(),
 );
+
+const _modeHints = {
+  TestMode.time: 'Solve as many as you can before the clock runs out.',
+  TestMode.count: 'Solve a set number of problems as fast as you can.',
+  TestMode.zen: 'No clock and no target. Finish whenever you like.',
+  TestMode.custom: 'Pick your own time limit or problem count.',
+};
 
 class QuickSettingsSheet extends ConsumerWidget {
   const QuickSettingsSheet({super.key});
@@ -25,10 +34,41 @@ class QuickSettingsSheet extends ConsumerWidget {
     final update = ref.read(settingsProvider.notifier).update;
     final practice = ref.read(practiceProvider);
     final z = context.zeta;
-    Widget label(String text) => Padding(
-      padding: const EdgeInsets.only(top: 16, bottom: 4),
-      child: Text(text, style: TextStyle(color: z.sub)),
+    final difficulty = difficultyOf(s.ranges);
+
+    Widget heading(String text) => Padding(
+      padding: const EdgeInsets.only(top: 24, bottom: 8),
+      child: Text(text, style: TextStyle(color: z.muted, fontSize: 13, letterSpacing: .5)),
     );
+
+    Future<void> askLength() async {
+      final n = await askNumber(
+        context,
+        title: s.timed ? 'seconds' : 'problems',
+        initial: s.timed ? s.duration : s.count,
+      );
+      if (n != null) update((s) => s.timed ? s.copyWith(duration: n.toInt()) : s.copyWith(count: n.toInt()));
+    }
+
+    // Length presets plus a last segment for any other value, which shows that value once set.
+    Widget lengths() {
+      final presets = s.timed ? timeOptions : countOptions;
+      final current = s.timed ? s.duration : s.count;
+      final unit = s.timed ? 's' : '';
+      final custom = presets.contains(current) ? null : current;
+      return Segmented<int?>(
+        options: [...presets, custom],
+        value: custom ?? current,
+        label: (n) => n == null ? 'other' : '$n$unit',
+        onSelected: (n) {
+          if (n == null || n == custom) {
+            askLength();
+            return;
+          }
+          update((s) => s.timed ? s.copyWith(duration: n) : s.copyWith(count: n));
+        },
+      );
+    }
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -36,35 +76,51 @@ class QuickSettingsSheet extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            label('mode'),
-            ChoiceChips(
+            Text(
+              'test',
+              style: TextStyle(color: z.text, fontSize: 22, fontWeight: FontWeight.w700),
+            ),
+            heading('mode'),
+            Segmented(
               options: TestMode.values,
               value: s.mode,
               label: (m) => m.name,
+              icon: (m) => modeIcons[m]!,
+              height: 64,
               onSelected: (m) => update((s) => s.copyWith(mode: m)),
             ),
-            if (s.mode != TestMode.zen) ...[
-              label(s.timed ? 'seconds' : 'problems'),
-              ChoiceChips(
-                options: s.timed ? timeOptions : countOptions,
-                value: s.timed ? s.duration : s.count,
-                onSelected: (n) => update((s) => s.timed ? s.copyWith(duration: n) : s.copyWith(count: n)),
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(_modeHints[s.mode]!, style: TextStyle(color: z.muted, fontSize: 13)),
+            ),
+            if (s.mode == TestMode.custom) ...[
+              heading('ends after'),
+              Segmented(
+                options: CustomKind.values,
+                value: s.customKind,
+                label: (k) => k == CustomKind.time ? 'a time limit' : 'a problem count',
+                onSelected: (k) => update((s) => s.copyWith(customKind: k)),
               ),
             ],
-            label('difficulty'),
-            ChoiceChips<Difficulty?>(
-              options: [...Difficulty.values, if (difficultyOf(s.ranges) == null) null],
-              value: difficultyOf(s.ranges),
-              label: (d) => d?.name ?? 'custom',
-              onSelected: (d) {
-                if (d != null) {
-                  update((s) => s.copyWith(ranges: difficultyRanges(d, s.ranges)));
-                }
-              },
+            if (s.mode != TestMode.zen) ...[heading(s.timed ? 'length' : 'problems'), lengths()],
+            heading('difficulty'),
+            Segmented<Difficulty>(
+              options: Difficulty.values,
+              value: difficulty,
+              label: (d) => d.name,
+              onSelected: (d) => update((s) => s.copyWith(ranges: difficultyRanges(d, s.ranges))),
             ),
-            label('theme'),
+            if (difficulty == null)
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Text(
+                  'Your ranges are custom. Edit them under settings, or pick a preset.',
+                  style: TextStyle(color: z.muted, fontSize: 13),
+                ),
+              ),
+            heading('theme'),
             SizedBox(
-              height: 56,
+              height: 44,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
@@ -78,17 +134,21 @@ class QuickSettingsSheet extends ConsumerWidget {
                 ],
               ),
             ),
-            if (practice.running) ...[
-              const SizedBox(height: 16),
+            const SizedBox(height: 24),
+            if (practice.running)
               OutlinedButton(
                 onPressed: () {
                   practice.finish();
                   Navigator.pop(context);
                 },
                 child: const Text('finish test'),
+              )
+            else
+              SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: FilledButton(onPressed: () => Navigator.pop(context), child: const Text('done')),
               ),
-              Text('the test timer keeps running while this is open', style: TextStyle(color: z.sub, fontSize: 12)),
-            ],
           ],
         ),
       ),

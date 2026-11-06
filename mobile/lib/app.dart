@@ -7,7 +7,6 @@ import 'features/practice/practice_screen.dart';
 import 'features/profile/profile_screen.dart';
 import 'features/settings/settings_screen.dart';
 import 'store/history_store.dart';
-import 'store/profile.dart';
 import 'store/settings.dart';
 import 'themes/themes.dart';
 
@@ -47,7 +46,6 @@ class _HomeShellState extends ConsumerState<HomeShell> {
   Widget build(BuildContext context) {
     final tab = ref.watch(tabProvider);
     final practice = ref.watch(practiceProvider);
-    final lvl = level(ref.watch(historyProvider.select((h) => h.results))).level;
     return ListenableBuilder(
       listenable: practice,
       builder: (context, _) {
@@ -66,19 +64,27 @@ class _HomeShellState extends ConsumerState<HomeShell> {
                   height: 64,
                   selectedIndex: tab.index,
                   onDestinationSelected: (i) => ref.read(tabProvider.notifier).go(AppTab.values[i]),
-                  destinations: [
-                    const NavigationDestination(icon: Icon(Icons.keyboard_outlined), label: 'practice'),
+                  destinations: const [
                     NavigationDestination(
-                      icon: Badge(
-                        label: Text('$lvl'),
-                        backgroundColor: context.zeta.main,
-                        textColor: context.zeta.bg,
-                        child: const Icon(Icons.person_outline),
-                      ),
+                      icon: Icon(Icons.keyboard_outlined),
+                      selectedIcon: Icon(Icons.keyboard),
+                      label: 'practice',
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.person_outline),
+                      selectedIcon: Icon(Icons.person),
                       label: 'profile',
                     ),
-                    const NavigationDestination(icon: Icon(Icons.settings_outlined), label: 'settings'),
-                    const NavigationDestination(icon: Icon(Icons.menu_book_outlined), label: 'learn'),
+                    NavigationDestination(
+                      icon: Icon(Icons.settings_outlined),
+                      selectedIcon: Icon(Icons.settings),
+                      label: 'settings',
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.menu_book_outlined),
+                      selectedIcon: Icon(Icons.menu_book),
+                      label: 'learn',
+                    ),
                   ],
                 ),
         );

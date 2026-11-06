@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 
 import '../../engine/scoring.dart';
+import '../../store/history.dart';
 import '../../store/settings.dart';
 import '../../themes/themes.dart';
 
-/// Countdown (timed) or elapsed seconds, and the shrinking time bar. Listens to [elapsed] only,
-/// so a frame tick repaints just this widget.
-class LiveTimer extends StatelessWidget {
-  const LiveTimer({super.key, required this.elapsed, required this.config});
+/// The scoreboard line over the problem: time on the left, solved and pace on the right,
+/// and the time bar under both. Listens to [elapsed] directly so a frame tick repaints only this.
+class StatusLine extends StatelessWidget {
+  const StatusLine({
+    super.key,
+    required this.elapsed,
+    required this.config,
+    required this.running,
+    required this.score,
+    required this.showTimer,
+    required this.showScore,
+    required this.showPace,
+  });
   final ValueNotifier<double> elapsed;
   final Settings config;
+  final bool running, showTimer, showScore, showPace;
+  final int score;
 
   @override
   Widget build(BuildContext context) {
@@ -21,67 +33,72 @@ class LiveTimer extends StatelessWidget {
           final seconds = config.timed
               ? (config.duration - ms / 1000).clamp(0, double.infinity).ceil()
               : (ms / 1000).floor();
+          final big = TextStyle(
+            fontSize: 28,
+            height: 1,
+            color: running ? z.main : z.muted,
+            fontWeight: FontWeight.w700,
+          );
+          final small = TextStyle(fontSize: 13, color: z.muted);
           return Column(
-            mainAxisSize: MainAxisSize.min,
             children: [
-              Semantics(
-                label: config.timed ? 'seconds remaining' : 'seconds elapsed',
-                value: '$seconds',
-                child: Text('$seconds', style: TextStyle(color: z.main, fontSize: 24)),
+              SizedBox(
+                height: 36,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    if (showTimer && config.mode != TestMode.zen || showTimer && running)
+                      Semantics(
+                        label: config.timed ? 'seconds remaining' : 'seconds elapsed',
+                        value: '$seconds',
+                        excludeSemantics: true,
+                        child: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(text: '$seconds', style: big),
+                              TextSpan(text: config.timed ? ' s left' : ' s', style: small),
+                            ],
+                          ),
+                        ),
+                      ),
+                    const Spacer(),
+                    if (running && showPace) Text('${ppm(score, ms).round()} ppm   ', style: small),
+                    if (running && showScore)
+                      Semantics(
+                        label: '$score solved',
+                        excludeSemantics: true,
+                        child: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '$score',
+                                style: big.copyWith(color: z.text),
+                              ),
+                              TextSpan(text: config.counted ? ' / ${config.count}' : ' solved', style: small),
+                            ],
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
               ),
-              if (config.timed)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(2),
-                    child: LinearProgressIndicator(
-                      value: (1 - ms / (config.duration * 1000)).clamp(0, 1),
-                      minHeight: 3,
-                      color: z.main,
-                      backgroundColor: z.sub.withValues(alpha: .15),
-                    ),
+              const SizedBox(height: 10),
+              if (showTimer && (config.timed || config.counted))
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(2),
+                  child: LinearProgressIndicator(
+                    value: config.timed
+                        ? (1 - ms / (config.duration * 1000)).clamp(0, 1)
+                        : (score / config.count).clamp(0, 1),
+                    minHeight: 4,
+                    color: running ? z.main : z.muted.withValues(alpha: .35),
+                    backgroundColor: z.raised,
                   ),
                 ),
             ],
           );
         },
       ),
-    );
-  }
-}
-
-/// Solved count and pace during a test.
-class LiveScore extends StatelessWidget {
-  const LiveScore({
-    super.key,
-    required this.score,
-    required this.elapsed,
-    required this.showScore,
-    required this.showPace,
-  });
-  final int score;
-  final ValueNotifier<double> elapsed;
-  final bool showScore, showPace;
-
-  @override
-  Widget build(BuildContext context) {
-    final style = TextStyle(color: context.zeta.sub, fontSize: 18);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        if (showScore)
-          Semantics(
-            label: '$score solved',
-            excludeSemantics: true,
-            child: Text('$score', style: style),
-          ),
-        if (showScore && showPace) const SizedBox(width: 16),
-        if (showPace)
-          ValueListenableBuilder<double>(
-            valueListenable: elapsed,
-            builder: (_, ms, _) => Text('${ppm(score, ms).round()} ppm', style: style),
-          ),
-      ],
     );
   }
 }

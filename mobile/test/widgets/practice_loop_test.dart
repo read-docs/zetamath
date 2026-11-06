@@ -21,13 +21,8 @@ void main() {
     Problem? previous;
     for (var i = 0; i < 3; i++) {
       final problem = previous = generateProblem(defaultRanges, rng, previousId: previous?.id);
-      expect(
-        find.textContaining(
-          '${problem.a} ${problem.op == Operation.subtract ? '−' : problem.op.symbol} ${problem.b}',
-          findRichText: true,
-        ),
-        findsOneWidget,
-      );
+      final shown = '${problem.a} ${problem.op == Operation.subtract ? '−' : problem.op.symbol} ${problem.b}';
+      expect(find.bySemanticsLabel(RegExp('^${RegExp.escape(shown)} equals')), findsOneWidget);
       for (final d in '${problem.answer}'.split('')) {
         clock.now += 300;
         await tester.tap(find.byKey(ValueKey('keypad-$d')));
@@ -43,7 +38,7 @@ void main() {
 
     await tester.tap(find.text('try again'));
     await tester.pumpAndSettle();
-    expect(find.text('tap a digit to begin'), findsOneWidget);
+    expect(find.text('tap a digit to start'), findsOneWidget);
   });
 
   testWidgets('a timed test counts down on the ticker and ends by itself', (tester) async {
@@ -53,11 +48,11 @@ void main() {
       clock: clock,
       settings: defaultSettings.copyWith(mode: TestMode.time, duration: 15, seed: 'widget'),
     );
-    expect(find.text('15'), findsWidgets);
+    expect(find.text('15 s left', findRichText: true), findsOneWidget);
     await tester.tap(find.byKey(const ValueKey('keypad-1')));
     clock.now += 4200;
     await tester.pump(const Duration(milliseconds: 16));
-    expect(find.text('11'), findsOneWidget);
+    expect(find.text('11 s left', findRichText: true), findsOneWidget);
     clock.now += 11000;
     await tester.pump(const Duration(milliseconds: 16));
     await tester.pumpAndSettle();
@@ -82,7 +77,7 @@ void main() {
 
   testWidgets('quick settings switch the mode and restart the test', (tester) async {
     final container = await pumpApp(tester);
-    await tester.tap(find.byTooltip('quick settings'));
+    await tester.tap(find.byTooltip('test settings'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('zen').last);
     await tester.pumpAndSettle();
@@ -90,7 +85,7 @@ void main() {
     expect(container.read(practiceProvider).config.mode, TestMode.zen);
   });
 
-  testWidgets('mid-test the mode chips are locked but restart still works, even in focus mode', (tester) async {
+  testWidgets('mid-test the test settings are locked but restart still works, even in focus mode', (tester) async {
     final container = await pumpApp(
       tester,
       clock: FakeClock(),
@@ -98,8 +93,10 @@ void main() {
     );
     await tester.tap(find.byKey(const ValueKey('keypad-1')));
     await tester.pump();
-    await tester.tap(find.text('count'), warnIfMissed: false);
+    await tester.tap(find.byTooltip('test settings'), warnIfMissed: false);
     await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    expect(find.text('difficulty'), findsNothing);
     expect(container.read(settingsProvider).mode, TestMode.time);
     expect(container.read(practiceProvider).running, isTrue);
     await tester.tap(find.byTooltip('restart'));

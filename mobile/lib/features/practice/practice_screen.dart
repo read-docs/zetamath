@@ -80,7 +80,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> with SingleTick
                   onKey: (key) => _practice.press(key, at: clock()),
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
             ],
           ],
         );
@@ -102,6 +102,9 @@ class _Stage extends StatelessWidget {
     final size = settings.size * 16;
     final answer = practice.input;
     final problemText = problem == null ? null : '${problem.a} ${opLabel(problem.op.symbol)} ${problem.b}';
+    final operator = TextStyle(color: z.muted);
+    // Monospace spaces are a full digit wide. Narrower, even gaps keep the problem reading as one unit.
+    final gap = WidgetSpan(child: SizedBox(width: size * .28));
 
     Widget line(List<InlineSpan> spans) => FittedBox(
       fit: BoxFit.scaleDown,
@@ -125,11 +128,14 @@ class _Stage extends StatelessWidget {
         label: '$problemText equals ${answer.isEmpty ? 'blank' : answer}',
         excludeSemantics: true,
         child: line([
-          TextSpan(text: problemText),
-          TextSpan(
-            text: ' = ',
-            style: TextStyle(color: z.sub),
-          ),
+          TextSpan(text: '${problem!.a}'),
+          gap,
+          TextSpan(text: opLabel(problem.op.symbol), style: operator),
+          gap,
+          TextSpan(text: '${problem.b}'),
+          gap,
+          TextSpan(text: '=', style: operator),
+          gap,
           TextSpan(
             text: answer.isEmpty ? ' ' : answer,
             style: TextStyle(color: z.main),
@@ -143,7 +149,13 @@ class _Stage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            line([TextSpan(text: problemText)]),
+            line([
+              TextSpan(text: '${problem!.a}'),
+              gap,
+              TextSpan(text: opLabel(problem.op.symbol), style: operator),
+              gap,
+              TextSpan(text: '${problem.b}'),
+            ]),
             const SizedBox(height: 12),
             Container(
               constraints: BoxConstraints(minWidth: size * 3),
@@ -164,23 +176,25 @@ class _Stage extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
       child: Column(
         children: [
-          if (settings.showTimer) LiveTimer(elapsed: practice.elapsed, config: config) else const SizedBox(height: 8),
-          Expanded(child: Center(child: body)),
-          LiveScore(
-            score: practice.score,
+          StatusLine(
             elapsed: practice.elapsed,
+            config: config,
+            running: practice.running,
+            score: practice.score,
+            showTimer: settings.showTimer,
             showScore: settings.showScore,
             showPace: settings.showPace,
           ),
-          if (!practice.running)
-            Padding(
-              padding: const EdgeInsets.only(top: 4),
-              child: Text('tap a digit to begin', style: TextStyle(color: z.sub, fontSize: 13)),
-            ),
-          const SizedBox(height: 8),
+          Expanded(child: Center(child: body)),
+          SizedBox(
+            height: 32,
+            child: practice.running
+                ? null
+                : Text('tap a digit to start', style: TextStyle(color: z.muted, fontSize: 14)),
+          ),
         ],
       ),
     );
