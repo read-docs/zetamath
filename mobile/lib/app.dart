@@ -50,43 +50,54 @@ class _HomeShellState extends ConsumerState<HomeShell> {
       listenable: practice,
       builder: (context, _) {
         final focus = practice.running && ref.watch(settingsProvider.select((s) => s.focusMode));
-        return Scaffold(
-          body: SafeArea(
-            bottom: focus,
-            child: IndexedStack(
-              index: tab.index,
-              children: const [PracticeScreen(), ProfileScreen(), SettingsScreen(), LearnScreen()],
+        // Android back ends a running test (saved, as browser back does on web), then returns to
+        // practice from another tab, and only then leaves the app. In focus mode it is the only way
+        // out of a zen run besides restart, which discards it.
+        return PopScope(
+          canPop: !practice.running && tab == AppTab.practice,
+          onPopInvokedWithResult: (didPop, _) {
+            if (didPop) return;
+            if (practice.running) return practice.finish();
+            ref.read(tabProvider.notifier).go(AppTab.practice);
+          },
+          child: Scaffold(
+            body: SafeArea(
+              bottom: focus,
+              child: IndexedStack(
+                index: tab.index,
+                children: const [PracticeScreen(), ProfileScreen(), SettingsScreen(), LearnScreen()],
+              ),
             ),
+            bottomNavigationBar: focus
+                ? null
+                : NavigationBar(
+                    height: 64,
+                    selectedIndex: tab.index,
+                    onDestinationSelected: (i) => ref.read(tabProvider.notifier).go(AppTab.values[i]),
+                    destinations: const [
+                      NavigationDestination(
+                        icon: Icon(Icons.keyboard_outlined),
+                        selectedIcon: Icon(Icons.keyboard),
+                        label: 'practice',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.person_outline),
+                        selectedIcon: Icon(Icons.person),
+                        label: 'profile',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.settings_outlined),
+                        selectedIcon: Icon(Icons.settings),
+                        label: 'settings',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.menu_book_outlined),
+                        selectedIcon: Icon(Icons.menu_book),
+                        label: 'learn',
+                      ),
+                    ],
+                  ),
           ),
-          bottomNavigationBar: focus
-              ? null
-              : NavigationBar(
-                  height: 64,
-                  selectedIndex: tab.index,
-                  onDestinationSelected: (i) => ref.read(tabProvider.notifier).go(AppTab.values[i]),
-                  destinations: const [
-                    NavigationDestination(
-                      icon: Icon(Icons.keyboard_outlined),
-                      selectedIcon: Icon(Icons.keyboard),
-                      label: 'practice',
-                    ),
-                    NavigationDestination(
-                      icon: Icon(Icons.person_outline),
-                      selectedIcon: Icon(Icons.person),
-                      label: 'profile',
-                    ),
-                    NavigationDestination(
-                      icon: Icon(Icons.settings_outlined),
-                      selectedIcon: Icon(Icons.settings),
-                      label: 'settings',
-                    ),
-                    NavigationDestination(
-                      icon: Icon(Icons.menu_book_outlined),
-                      selectedIcon: Icon(Icons.menu_book),
-                      label: 'learn',
-                    ),
-                  ],
-                ),
         );
       },
     );

@@ -75,6 +75,30 @@ void main() {
     expect(container.read(historyProvider).results, hasLength(1));
   });
 
+  testWidgets('back ends a running zen test in focus mode, then leaves other tabs for practice', (tester) async {
+    final container = await pumpApp(
+      tester,
+      clock: FakeClock(),
+      settings: defaultSettings.copyWith(mode: TestMode.zen, focusMode: true, seed: 'widget'),
+    );
+    await tester.tap(find.byKey(const ValueKey('keypad-1')));
+    await tester.pump();
+    expect(container.read(practiceProvider).running, isTrue);
+    expect(find.text('profile'), findsNothing);
+
+    await tester.binding.handlePopRoute();
+    await tester.pumpAndSettle();
+    expect(container.read(practiceProvider).running, isFalse);
+    expect(container.read(historyProvider).results.single.mode, TestMode.zen);
+    expect(find.text('profile'), findsOneWidget);
+
+    await tester.tap(find.text('profile'));
+    await tester.pumpAndSettle();
+    await tester.binding.handlePopRoute();
+    await tester.pumpAndSettle();
+    expect(container.read(tabProvider), AppTab.practice);
+  });
+
   testWidgets('quick settings switch the mode and restart the test', (tester) async {
     final container = await pumpApp(tester);
     await tester.tap(find.byTooltip('test settings'));
