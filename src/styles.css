@@ -93,3 +93,16 @@ header .brand, header>a:first-child { font-size:1rem; letter-spacing:0; font-wei
 .practicing header nav,.practicing .mode-bar,.practicing .hint,.practicing footer { visibility:hidden; pointer-events:none; }
 .practicing .test-stage { min-height:61vh; }
 @media(max-width:640px) { header { width:calc(100% - 32px); } .session-timer { right:16px; top:28px; } .inline-answer { gap:.2em; } }
+.command-terminal { width:min(640px,calc(100vw - 32px)); background:var(--bg); border:1px solid color-mix(in srgb,var(--sub) 25%,transparent); border-radius:10px; box-shadow:0 24px 90px #0006; overflow:hidden; }
+.command-breadcrumb { display:flex; align-items:center; padding:12px 18px 0; color:var(--sub); font-size:.75rem; }
+.command-breadcrumb button { padding:4px; }
+.command-close { margin-left:auto; }
+.command-prompt { display:flex; align-items:center; gap:14px; padding:12px 22px; color:var(--main); border-bottom:1px solid color-mix(in srgb,var(--sub) 20%,transparent); }
+.command-prompt input { width:100%; border:0; padding:8px 0; background:none; outline:none; border-radius:0; }
+.command-list { max-height:min(50vh,420px); overflow-y:auto; padding:8px; }
+.command-list button { width:100%; display:flex; justify-content:space-between; text-align:left; padding:10px 16px; border-radius:4px; font-size:.9rem; }
+.command-list button.selected { background:var(--main); color:var(--bg); }
+.command-list button span:last-child { opacity:.65; margin-left:16px; }
+.command-help { color:var(--sub); padding:12px 22px; font-size:.65rem; border-top:1px solid color-mix(in srgb,var(--sub) 20%,transparent); }
+.command-error { color:var(--error); padding:8px 22px; margin:0; font-size:.8rem; }
+.settings-entry { margin:15vh auto; text-align:center; color:var(--sub); }
