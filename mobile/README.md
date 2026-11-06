@@ -25,6 +25,14 @@ Release builds use `android/key.properties` when it exists (`storeFile`, `storeP
 - `lib/features`: the practice screen with its keypad, results, profile and settings.
 - `test/engine` and `test/store` check the ports against `../shared/fixtures`, which the web engine writes. `test/widgets` runs the practice loop and checks every screen at the A54 sizes for overflow.
 
+## Launcher icon
+
+The icon is the web logo, a keycap holding a ζ, drawn in code by `test/screens/icon_test.dart`. To change it, edit that file and regenerate every density:
+
+```sh
+fvm flutter test test/screens/icon_test.dart --dart-define=ICONS=android/app/src/main/res
+```
+
 ## Keeping the engines in step
 
 A change to the web engine or stores needs new fixtures: run `npm run fixtures` in `web/` and commit `shared/fixtures`. The web tests fail if the committed fixtures are stale, and the Flutter tests fail if the Dart port no longer matches them.
