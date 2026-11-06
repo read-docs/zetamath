@@ -15,11 +15,12 @@ export interface Settings {
   showScore: boolean;
   showPace: boolean;
   focusMode: boolean;
+  answerStyle: 'stacked' | 'inline';
 }
 export const defaultSettings: Settings = {
   mode: 'time', duration: 120, count: 25, customKind: 'time', ranges: defaultRanges,
   theme: 'iceberg', font: 'JetBrains Mono', size: 4,
-  showTimer: true, showScore: true, showPace: true, focusMode: false,
+  showTimer: true, showScore: true, showPace: false, focusMode: true, answerStyle: 'inline',
 };
 export const useSettings = create<Settings & {
   update: (patch: Partial<Settings>) => void;
@@ -28,4 +29,4 @@ export const useSettings = create<Settings & {
   ...defaultSettings,
   update: (patch) => set(patch),
   reset: () => set(structuredClone(defaultSettings)),
-}), { name: 'zetamath-settings', version: 1 }));
+}), { name: 'zetamath-settings', version: 2, migrate: (saved) => ({...defaultSettings, ...(saved as Partial<Settings>), showPace: false, answerStyle: 'inline' as const}) }));
