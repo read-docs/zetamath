@@ -36,7 +36,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
 
-      for (final tab in ['profile', 'settings']) {
+      for (final tab in ['profile', 'settings', 'learn']) {
         await tester.tap(find.text(tab));
         await tester.pumpAndSettle();
         await tester.fling(find.byType(Scrollable).first, const Offset(0, -3000), 3000);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'features/learn/learn_screen.dart';
 import 'features/practice/practice_providers.dart';
 import 'features/practice/practice_screen.dart';
 import 'features/profile/profile_screen.dart';
@@ -26,7 +27,7 @@ class ZetamathApp extends ConsumerWidget {
   }
 }
 
-/// Bottom navigation between practice, profile and settings. Practice stays mounted so a
+/// Bottom navigation between practice, profile, settings and learning. Practice stays mounted so a
 /// result or a half-typed answer survives a tab switch.
 class HomeShell extends ConsumerStatefulWidget {
   const HomeShell({super.key});
@@ -56,7 +57,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
             bottom: focus,
             child: IndexedStack(
               index: tab.index,
-              children: const [PracticeScreen(), ProfileScreen(), SettingsScreen()],
+              children: const [PracticeScreen(), ProfileScreen(), SettingsScreen(), LearnScreen()],
             ),
           ),
           bottomNavigationBar: focus
@@ -77,6 +78,7 @@ class _HomeShellState extends ConsumerState<HomeShell> {
                       label: 'profile',
                     ),
                     const NavigationDestination(icon: Icon(Icons.settings_outlined), label: 'settings'),
+                    const NavigationDestination(icon: Icon(Icons.menu_book_outlined), label: 'learn'),
                   ],
                 ),
         );

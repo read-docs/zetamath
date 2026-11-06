@@ -35,3 +35,7 @@ A change to the web engine or stores needs new fixtures: run `npm run fixtures` 
 - Restart is a button in the mode bar and under results. The tune button opens quick settings in place of Esc.
 - Leaving the app or switching tabs ends a running test. It is saved, but unfinished tests never count as personal bests.
 - Extra settings: haptics, keypad layout (phone or calculator) and a fixed seed.
+
+## Learn
+
+The Learn tab includes the same twelve techniques as the web page, grouped by operation, with worked examples and expandable solutions. Lessons work offline; source links open in your browser. Content lives in `lib/features/learn/lessons.dart` and mirrors `web/src/content/lessons.ts`.

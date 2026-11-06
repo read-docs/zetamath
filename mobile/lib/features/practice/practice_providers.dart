@@ -40,7 +40,7 @@ final practiceProvider = Provider<PracticeController>((ref) {
   return c;
 });
 
-enum AppTab { practice, profile, settings }
+enum AppTab { practice, profile, settings, learn }
 
 final tabProvider = NotifierProvider<TabNotifier, AppTab>(TabNotifier.new);
 
