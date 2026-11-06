@@ -1,3 +1,4 @@
+import {lazy,Suspense,useEffect,useMemo,useState} from 'react';
 import {useSession} from './hooks/useSession';
 import CommandPalette from './components/CommandPalette';
 import ModeBar from './components/ModeBar';
@@ -7,7 +8,6 @@ const Chart = lazy(() => import('./components/PaceChart'));
 import SettingsPage from './components/SettingsPage';
 import {BookIcon,GearIcon,KeyboardIcon,LogoMark,UserIcon} from './components/icons';
 import {level} from './store/profile';
-import {lazy,Suspense,useEffect,useMemo,useState} from 'react';
 
 import {operations} from './engine/generator';
 import {useSettings,type Settings} from './store/settings';
