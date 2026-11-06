@@ -1,0 +1,17 @@
+import {useEffect,useRef,useState} from 'react';
+import {generateProblem,type Problem} from '../engine/generator';
+import {createRng} from '../engine/rng';
+import {useSettings,type Settings} from '../store/settings';
+import {useHistory,type Result} from '../store/history';
+
+export function useSession(setError: (message: string) => void) {
+ const s=useSettings(), h=useHistory();
+ const [problem,setProblem]=useState<Problem|null>(null),[input,setInput]=useState(''),[elapsed,setElapsed]=useState(0),[running,setRunning]=useState(false),[result,setResult]=useState<Result|null>(null),[pb,setPb]=useState(false),[score,setScore]=useState(0);
+ const field=useRef<HTMLInputElement>(null),start=useRef<number|null>(null),last=useRef(0),logs=useRef<Result['logs']>([]),rng=useRef(createRng('')),seed=useRef(''),config=useRef<Settings>(s),drill=useRef<Problem[]|null>(null),drillIndex=useRef(0);
+ function next(previous?:Problem){if(drill.current){const p=drill.current[drillIndex.current++%drill.current.length];setProblem(p)}else setProblem(generateProblem(config.current.ranges,rng.current,previous))}
+ function restart(problems:Problem[]|null=null){start.current=null;setRunning(false);setElapsed(0);setScore(0);logs.current=[];setInput('');setResult(null);setPb(false);setError('');config.current={...useSettings.getState()};drill.current=problems;drillIndex.current=0;seed.current=new URLSearchParams(location.search).get('seed')||crypto.randomUUID();rng.current=createRng(seed.current);try{next()}catch(e){setProblem(null);setError(String(e))}requestAnimationFrame(()=>field.current?.focus())}
+ function finish(now=performance.now()){if(start.current===null)return;const c=config.current;const ms=now-start.current;start.current=null;setRunning(false);setElapsed(ms);const r:Result={id:crypto.randomUUID(),date:new Date().toISOString(),mode:c.mode,duration:c.duration,count:c.count,customKind:c.customKind,ranges:c.ranges,seed:seed.current,elapsedMs:ms,logs:[...logs.current],drill:!!drill.current};setResult(r);void h.add(r).then(setPb).catch(e=>setError(String(e)))}
+ useEffect(()=>{if(!running)return;let frame:number;const tick=()=>{if(start.current===null)return;const ms=performance.now()-start.current,c=config.current,timed=c.mode==='time'||c.mode==='custom'&&c.customKind==='time';if(timed&&ms>=c.duration*1000){finish(start.current+c.duration*1000);return}setElapsed(ms);frame=requestAnimationFrame(tick)};frame=requestAnimationFrame(tick);return()=>cancelAnimationFrame(frame)},[running]);
+ function answer(value:string){if(!problem)return;const clean=value.replace(/[^0-9-]/g,'');setInput(clean);const now=performance.now();if(start.current===null&&/\d/.test(clean)){config.current={...useSettings.getState()};start.current=now;last.current=now;setRunning(true)}if(start.current===null)return;const c=config.current;if((c.mode==='time'||c.mode==='custom'&&c.customKind==='time')&&now-start.current>=c.duration*1000){finish(start.current+c.duration*1000);return}if(parseInt(clean,10)===problem.answer){logs.current.push({problem,timeMs:now-last.current});last.current=now;setScore(logs.current.length);setInput('');if((c.mode==='count'||c.mode==='custom'&&c.customKind==='count')&&logs.current.length>=c.count){finish(now);return}try{next(problem)}catch(e){setError(String(e));finish(now)}}}
+ return {problem,input,elapsed,running,result,pb,score,field,config,restart,finish,answer,setResult};
+}

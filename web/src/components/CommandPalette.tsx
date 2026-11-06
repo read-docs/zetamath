@@ -2,17 +2,16 @@ import {useEffect,useRef,useState} from 'react';
 import {useSettings,type Settings} from '../store/settings';
 import {difficultyRanges,currentDifficulty,difficulties} from '../store/difficulty';
 import {operations,validateRanges} from '../engine/generator';
-import {themes} from '../themes';
+import {themes,fonts} from '../themes';
 type Entry={label:string,value?:string,run:()=>void};
-const fonts=['JetBrains Mono','Roboto Mono','Fira Code','IBM Plex Mono','Space Mono','Lexend Deca'];
-export default function CommandPalette({close,change,running,finish,history}:{close:()=>void,change:(p:Partial<Settings>)=>void,running:boolean,finish:()=>void,history:()=>void}) {
- const s=useSettings();const [path,setPath]=useState(''),[query,setQuery]=useState(''),[selected,setSelected]=useState(0),[error,setError]=useState('');const input=useRef<HTMLInputElement>(null);
+export default function CommandPalette({close,change,running,finish,history,initialPath=''}:{initialPath?:string,close:()=>void,change:(p:Partial<Settings>)=>void,running:boolean,finish:()=>void,history:()=>void}) {
+ const s=useSettings();const [path,setPath]=useState(initialPath),[query,setQuery]=useState(''),[selected,setSelected]=useState(0),[error,setError]=useState('');const input=useRef<HTMLInputElement>(null);
  function enter(p:string){setPath(p);setQuery('');setSelected(0);setError('');input.current?.focus()}
  function apply(p:Partial<Settings>){change(p);close()}
  const menu=(label:string,value?:string):Entry=>({label,value,run:()=>enter(label)});
  const choices=(values:readonly string[],key:keyof Settings):Entry[]=>values.map(v=>({label:v,value:s[key]===v?'✓':'',run:()=>apply({[key]:v})}));
  let entries:Entry[]=[];
- if(!path)entries=[menu('difficulty',currentDifficulty(s.ranges)),menu('mode',s.mode),menu('duration',`${s.duration}s`),menu('count',String(s.count)),menu('custom goal',s.customKind),menu('theme',s.theme),menu('font',s.font),menu('answer style',s.answerStyle),menu('problem size',`${s.size}rem`),...(['showTimer','showScore','showPace'] as const).map((k,i)=>({label:['live timer','live score','live pace'][i],value:s[k]?'on':'off',run:()=>apply({[k]:!s[k]})})),menu('operations and ranges'),{label:'history / export / import',run:history},...(running?[{label:'finish test',run:finish}]:[])];
+ if(!path)entries=[menu('difficulty',currentDifficulty(s.ranges)),menu('mode',s.mode),menu('duration',`${s.duration}s`),menu('count',String(s.count)),menu('custom goal',s.customKind),menu('theme',s.theme),menu('font',s.font),menu('answer style',s.answerStyle),menu('problem size',`${s.size}rem`),...(['showTimer','showScore','showPace'] as const).map((k,i)=>({label:['live timer','live score','live pace'][i],value:s[k]?'on':'off',run:()=>apply({[k]:!s[k]})})),menu('operations and ranges'),{label:'profile / history / export',run:history},...(running?[{label:'finish test',run:finish}]:[])];
  else if(path==='difficulty')entries=Object.keys(difficulties).map(name=>({label:name,value:name===currentDifficulty(s.ranges)?'✓':'',run:()=>apply({ranges:difficultyRanges(name as keyof typeof difficulties,s.ranges)})}));
  else if(path==='mode')entries=choices(['time','count','zen','custom'],'mode');
  else if(path==='custom goal')entries=choices(['time','count'],'customKind');

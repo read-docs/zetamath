@@ -17,22 +17,22 @@ export interface Result {
   drill?: boolean;
 }
 const operations = ['+', '-', '×', '÷'] as const;
+export const isCountRun = (r: Pick<Result, 'mode' | 'customKind'>) => r.mode === 'count' || (r.mode === 'custom' && r.customKind === 'count');
+export function rangesKey(ranges: RangeConfig): string {
+  return JSON.stringify(operations.map(op => [op, ranges[op].enabled, ranges[op].weight, ranges[op].minA, ranges[op].maxA, ranges[op].minB, ranges[op].maxB]));
+}
 export function resultKey(r: Result): string {
-  const target = r.mode === 'count' || (r.mode === 'custom' && r.customKind === 'count') ? r.count : r.duration;
-  return JSON.stringify([r.mode, r.mode === 'custom' ? r.customKind : '', target,
-    operations.map(op => [op, r.ranges[op].enabled, r.ranges[op].weight, r.ranges[op].minA, r.ranges[op].maxA, r.ranges[op].minB, r.ranges[op].maxB])]);
+  return JSON.stringify([r.mode, r.mode === 'custom' ? r.customKind : '', isCountRun(r) ? r.count : r.duration, rangesKey(r.ranges)]);
 }
 export const pace = (r: Result) => r.elapsedMs > 0 ? r.logs.length * 60000 / r.elapsedMs : 0;
 function better(a: Result, b: Result): boolean {
-  return a.mode === 'count' || (a.mode === 'custom' && a.customKind === 'count')
-    ? a.elapsedMs < b.elapsedMs : a.logs.length > b.logs.length;
+  return isCountRun(a) ? a.elapsedMs < b.elapsedMs : a.logs.length > b.logs.length;
 }
 export function personalBests(results: Result[]): Result[] {
   const best = new Map<string, Result>();
   for (const r of results) {
     if (r.drill || r.mode === 'zen' || !r.logs.length) continue;
-    const countMode = r.mode === 'count' || (r.mode === 'custom' && r.customKind === 'count');
-    if (countMode ? r.logs.length < r.count : r.elapsedMs < r.duration * 1000) continue;
+    if (isCountRun(r) ? r.logs.length < r.count : r.elapsedMs < r.duration * 1000) continue;
     const key = resultKey(r), previous = best.get(key);
     if (!previous || better(r, previous)) best.set(key, r);
   }
@@ -64,13 +64,15 @@ export function parseHistory(json: string): Result[] {
   if (!Array.isArray(records) || !records.every(validResult)) throw new Error('Invalid history file. Choose a Zetamath JSON export.');
   return records;
 }
-const key = 'zetamath-results-v1';
-let loading: Promise<void> | undefined;
-let writes = Promise.resolve();
-function persist(results: Result[]): Promise<void> {
-  writes = writes.catch(() => {}).then(() => put(key, results));
-  return writes;
+/** Where results live. Local IndexedDB today; swap in a remote implementation with setHistoryBackend. */
+export interface HistoryBackend {
+  load(): Promise<unknown>;
+  save(results: Result[]): Promise<void>;
 }
+const key = 'zetamath-results-v1';
+export const localHistoryBackend: HistoryBackend = { load: () => get(key), save: results => put(key, results) };
+let backend = localHistoryBackend;
+export function setHistoryBackend(next: HistoryBackend) { backend = next; }
 interface HistoryStore {
   results: Result[]; loaded: boolean; error: string | null;
   load: () => Promise<void>;
@@ -79,36 +81,54 @@ interface HistoryStore {
   exportJSON: () => string;
   clear: () => Promise<void>;
 }
-export const useHistory = create<HistoryStore>((set, state) => ({
+export function createHistoryStore(storage: HistoryBackend) {
+ let loading: Promise<void> | undefined;
+ let mutations = Promise.resolve();
+ function enqueue<T>(action: () => Promise<T>): Promise<T> {
+   const next = mutations.then(action);
+   mutations = next.then(() => {}, () => {});
+   return next;
+ }
+ return create<HistoryStore>((set, state) => ({
   results: [], loaded: false, error: null,
   load: () => {
     if (state().loaded) return Promise.resolve();
-    if (!loading) loading = get<unknown>(key).then(data => {
+    if (!loading) loading = storage.load().then(data => {
       const results = data === undefined ? [] : parseHistory(JSON.stringify(data));
       set({results, loaded: true, error: null});
-    }).catch(error => { set({loaded: true, error: `History could not be loaded: ${String(error)}`}); }).finally(() => { loading = undefined; });
+    }).catch(error => { set({loaded: false, error: `History could not be loaded: ${String(error)}`}); }).finally(() => { loading = undefined; });
     return loading;
   },
-  add: async result => {
+  add: result => enqueue(async () => {
     await state().load();
+    if (!state().loaded) throw new Error(state().error || 'History is unavailable.');
     const previous = personalBests(state().results).find(r => resultKey(r) === resultKey(result));
     const isPB = personalBests([result]).length > 0 && (!previous || better(result, previous));
     const results = [result, ...state().results.filter(r => r.id !== result.id)];
     set({results});
-    try { await persist(results); set({error: null}); }
+    try { await storage.save(results); set({error: null}); }
     catch { set({error: 'History could not be saved. Export your results to keep a backup.'}); }
     return isPB;
-  },
-  importJSON: async json => {
+  }),
+  importJSON: json => enqueue(async () => {
     const imported = parseHistory(json);
     await state().load();
+    if (!state().loaded) throw new Error(state().error || 'History is unavailable.');
     const merged = new Map(state().results.map(r => [r.id, r]));
     for (const r of imported) merged.set(r.id, r);
     const results = [...merged.values()].sort((a,b) => Date.parse(b.date) - Date.parse(a.date));
-    await persist(results);
+    await storage.save(results);
     set({results, error: null});
     return imported.length;
-  },
+  }),
   exportJSON: () => JSON.stringify({version: 1, results: state().results}, null, 2),
-  clear: async () => { await persist([]); set({results: [], error: null}); },
+  clear: () => enqueue(async () => {
+    await state().load();
+    if (!state().loaded) throw new Error(state().error || 'History is unavailable.');
+    try { await storage.save([]); set({results: [], error: null}); }
+    catch (error) { set({error: 'History could not be cleared.'}); throw error; }
+  }),
 }));
+
+}
+export const useHistory = createHistoryStore({load: () => backend.load(), save: results => backend.save(results)});

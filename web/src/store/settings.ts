@@ -16,11 +16,12 @@ export interface Settings {
   showPace: boolean;
   focusMode: boolean;
   answerStyle: 'stacked' | 'inline';
+  name: string;
 }
 export const defaultSettings: Settings = {
   mode: 'time', duration: 120, count: 25, customKind: 'time', ranges: defaultRanges,
   theme: 'iceberg', font: 'JetBrains Mono', size: 4,
-  showTimer: true, showScore: true, showPace: false, focusMode: true, answerStyle: 'inline',
+  showTimer: true, showScore: true, showPace: false, focusMode: true, answerStyle: 'inline', name: '',
 };
 export const useSettings = create<Settings & {
   update: (patch: Partial<Settings>) => void;

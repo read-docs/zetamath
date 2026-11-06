@@ -16,3 +16,4 @@ export const themes: Record<string, Theme> = {
   snow: { bg: '#f0f4f8', main: '#396ba5', sub: '#69788a', text: '#273548', error: '#bd3a52' },
   mint: { bg: '#e9f1eb', main: '#356e52', sub: '#677d6e', text: '#283e30', error: '#b63f49' },
 };
+export const fonts = ['JetBrains Mono','Roboto Mono','Fira Code','IBM Plex Mono','Space Mono','Lexend Deca'];
