@@ -1,4 +1,4 @@
-// Draws the launcher icon from the web logo (a keycap holding a zeta) and writes every Android
+// Draws the launcher icon, the ζ from the web logo, and writes every Android
 // density. Not part of the suite: run `fvm flutter test test/screens/icon_test.dart --dart-define=ICONS=android/app/src/main/res`.
 import 'dart:io';
 import 'dart:ui' as ui;
@@ -12,25 +12,13 @@ const out = String.fromEnvironment('ICONS');
 const densities = {'mdpi': 1.0, 'hdpi': 1.5, 'xhdpi': 2.0, 'xxhdpi': 3.0, 'xxxhdpi': 4.0};
 final theme = themes['iceberg']!;
 
-/// The web `LogoMark` (viewBox 44 × 32), centred in [box] at [width] logical units wide.
-void paintLogo(Canvas canvas, Size box, double width, Color color) {
-  final scale = width / 44;
-  canvas.save();
-  canvas.translate((box.width - width) / 2, (box.height - 32 * scale) / 2);
-  canvas.scale(scale);
-  canvas.drawRRect(
-    RRect.fromRectAndRadius(const Rect.fromLTWH(2, 2, 40, 28), const Radius.circular(7)),
-    Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 3
-      ..color = color,
-  );
-  // Slightly larger and heavier than on web, so the glyph holds up at launcher size.
+/// A bold ζ centred in [box]. [size] is the font size in pixels.
+void paintZeta(Canvas canvas, Size box, double size, Color color) {
   // A stroke over the fill adds weight the variable font's axis alone doesn't give here.
   TextPainter zeta(Paint paint) => TextPainter(
     text: TextSpan(
       text: 'ζ',
-      style: TextStyle(fontFamily: 'JetBrains Mono', fontSize: 21, fontWeight: FontWeight.w700, foreground: paint),
+      style: TextStyle(fontFamily: 'JetBrains Mono', fontSize: size, fontWeight: FontWeight.w700, foreground: paint),
     ),
     textDirection: TextDirection.ltr,
   )..layout();
@@ -38,16 +26,15 @@ void paintLogo(Canvas canvas, Size box, double width, Color color) {
   final stroke = zeta(
     Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.1
+      ..strokeWidth = size * .05
       ..strokeJoin = StrokeJoin.round
       ..color = color,
   );
-  // Web puts the baseline at y = 23 for a 19 px glyph; the larger glyph sits a little lower.
+  // The glyph's ink is centred about 0.28 em above its baseline (from its top serif to the tail).
   final baseline = fill.computeDistanceToActualBaseline(TextBaseline.alphabetic);
-  for (final p in [fill, stroke]) {
-    p.paint(canvas, Offset(22 - p.width / 2, 23.6 - baseline));
-  }
-  canvas.restore();
+  final offset = Offset((box.width - fill.width) / 2, box.height / 2 + size * .28 - baseline);
+  fill.paint(canvas, offset);
+  stroke.paint(canvas, offset);
 }
 
 Future<void> writePng(String path, int px, void Function(Canvas, Size) paint) async {
@@ -69,14 +56,14 @@ void main() {
     await loader.load();
 
     for (final MapEntry(key: name, value: d) in densities.entries) {
-      // Adaptive foreground: 108 dp canvas, logo kept inside the 66 dp safe circle.
+      // Adaptive foreground: 108 dp canvas, glyph kept inside the 66 dp safe circle.
       await writePng('$out/mipmap-$name/ic_launcher_foreground.png', (108 * d).round(), (c, s) {
-        paintLogo(c, s, 52 * d, theme.main);
+        paintZeta(c, s, 52 * d, theme.main);
       });
-      // Legacy icon for Android 7: 48 dp rounded square with the logo on the theme background.
+      // Legacy icon for Android 7: 48 dp rounded square with the glyph on the theme background.
       await writePng('$out/mipmap-$name/ic_launcher.png', (48 * d).round(), (c, s) {
         c.drawRRect(RRect.fromRectAndRadius(Offset.zero & s, Radius.circular(10 * d)), Paint()..color = theme.bg);
-        paintLogo(c, s, 34 * d, theme.main);
+        paintZeta(c, s, 34 * d, theme.main);
       });
     }
   });

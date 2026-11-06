@@ -27,7 +27,7 @@ Release builds use `android/key.properties` when it exists (`storeFile`, `storeP
 
 ## Launcher icon
 
-The icon is the web logo, a keycap holding a ζ, drawn in code by `test/screens/icon_test.dart`. To change it, edit that file and regenerate every density:
+The icon is the ζ from the web logo, drawn in code by `test/screens/icon_test.dart`. To change it, edit that file and regenerate every density:
 
 ```sh
 fvm flutter test test/screens/icon_test.dart --dart-define=ICONS=android/app/src/main/res
