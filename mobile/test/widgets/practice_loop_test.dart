@@ -99,6 +99,22 @@ void main() {
     expect(container.read(tabProvider), AppTab.practice);
   });
 
+  testWidgets('finish ends and saves a zen run, and only shows while one runs', (tester) async {
+    final container = await pumpApp(
+      tester,
+      clock: FakeClock(),
+      settings: defaultSettings.copyWith(mode: TestMode.zen, focusMode: true, seed: 'widget'),
+    );
+    expect(find.text('finish'), findsNothing);
+    await tester.tap(find.byKey(const ValueKey('keypad-1')));
+    await tester.pump();
+    await tester.tap(find.text('finish'));
+    await tester.pumpAndSettle();
+    expect(container.read(practiceProvider).running, isFalse);
+    expect(container.read(historyProvider).results.single.mode, TestMode.zen);
+    expect(find.text('finish'), findsNothing);
+  });
+
   testWidgets('quick settings switch the mode and restart the test', (tester) async {
     final container = await pumpApp(tester);
     await tester.tap(find.byTooltip('test settings'));
