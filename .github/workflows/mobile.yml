@@ -1,0 +1,49 @@
+name: mobile
+
+on:
+  push:
+    branches: [main]
+    paths: ['mobile/**', 'shared/**', '.github/workflows/mobile.yml']
+  pull_request:
+    paths: ['mobile/**', 'shared/**', '.github/workflows/mobile.yml']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: mobile/.fvmrc
+          cache: true
+      - run: flutter pub get
+      - run: flutter analyze
+      # Engine tests read ../shared/fixtures, written by the web engine.
+      - run: flutter test
+
+  apk:
+    needs: test
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: mobile/.fvmrc
+          cache: true
+      # No key.properties in CI, so this APK is signed with the debug key.
+      - run: flutter build apk --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: zetamath-apk
+          path: mobile/build/app/outputs/flutter-apk/app-release.apk

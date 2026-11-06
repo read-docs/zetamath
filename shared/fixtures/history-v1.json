@@ -1,0 +1,4294 @@
+{
+  "version": 1,
+  "results": [
+    {
+      "id": "fixture-17",
+      "date": "2026-11-05T12:17:00.000Z",
+      "mode": "zen",
+      "duration": 120,
+      "count": 25,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 20,
+          "minB": 2,
+          "maxB": 20
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 20,
+          "minB": 2,
+          "maxB": 20
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 5,
+          "minB": 2,
+          "maxB": 20
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 5,
+          "minB": 2,
+          "maxB": 20
+        }
+      },
+      "seed": "seed-17",
+      "elapsedMs": 56995.4,
+      "logs": [
+        {
+          "problem": {
+            "a": 3,
+            "b": 9,
+            "op": "×",
+            "answer": 27,
+            "id": "3×9"
+          },
+          "timeMs": 2373.7
+        },
+        {
+          "problem": {
+            "a": 11,
+            "b": 15,
+            "op": "+",
+            "answer": 26,
+            "id": "11+15"
+          },
+          "timeMs": 1916.6
+        },
+        {
+          "problem": {
+            "a": 3,
+            "b": 12,
+            "op": "×",
+            "answer": 36,
+            "id": "3×12"
+          },
+          "timeMs": 2624.5
+        },
+        {
+          "problem": {
+            "a": 14,
+            "b": 18,
+            "op": "+",
+            "answer": 32,
+            "id": "14+18"
+          },
+          "timeMs": 652.2
+        },
+        {
+          "problem": {
+            "a": 10,
+            "b": 17,
+            "op": "+",
+            "answer": 27,
+            "id": "10+17"
+          },
+          "timeMs": 1467.4
+        },
+        {
+          "problem": {
+            "a": 9,
+            "b": 6,
+            "op": "-",
+            "answer": 3,
+            "id": "9-6"
+          },
+          "timeMs": 1089.2
+        },
+        {
+          "problem": {
+            "a": 51,
+            "b": 17,
+            "op": "÷",
+            "answer": 3,
+            "id": "51÷17"
+          },
+          "timeMs": 2451.4
+        },
+        {
+          "problem": {
+            "a": 2,
+            "b": 6,
+            "op": "×",
+            "answer": 12,
+            "id": "2×6"
+          },
+          "timeMs": 1809.2
+        },
+        {
+          "problem": {
+            "a": 22,
+            "b": 7,
+            "op": "-",
+            "answer": 15,
+            "id": "22-7"
+          },
+          "timeMs": 1707.7
+        },
+        {
+          "problem": {
+            "a": 17,
+            "b": 14,
+            "op": "+",
+            "answer": 31,
+            "id": "17+14"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 25,
+            "b": 10,
+            "op": "-",
+            "answer": 15,
+            "id": "25-10"
+          },
+          "timeMs": 478.8
+        },
+        {
+          "problem": {
+            "a": 24,
+            "b": 17,
+            "op": "-",
+            "answer": 7,
+            "id": "24-17"
+          },
+          "timeMs": 2060.8
+        },
+        {
+          "problem": {
+            "a": 36,
+            "b": 18,
+            "op": "÷",
+            "answer": 2,
+            "id": "36÷18"
+          },
+          "timeMs": 1377.8
+        },
+        {
+          "problem": {
+            "a": 32,
+            "b": 16,
+            "op": "÷",
+            "answer": 2,
+            "id": "32÷16"
+          },
+          "timeMs": 1696.4
+        },
+        {
+          "problem": {
+            "a": 14,
+            "b": 3,
+            "op": "+",
+            "answer": 17,
+            "id": "14+3"
+          },
+          "timeMs": 2865.8
+        },
+        {
+          "problem": {
+            "a": 60,
+            "b": 12,
+            "op": "÷",
+            "answer": 5,
+            "id": "60÷12"
+          },
+          "timeMs": 2353.2
+        },
+        {
+          "problem": {
+            "a": 30,
+            "b": 6,
+            "op": "÷",
+            "answer": 5,
+            "id": "30÷6"
+          },
+          "timeMs": 1836.9
+        },
+        {
+          "problem": {
+            "a": 25,
+            "b": 17,
+            "op": "-",
+            "answer": 8,
+            "id": "25-17"
+          },
+          "timeMs": 2553.9
+        },
+        {
+          "problem": {
+            "a": 11,
+            "b": 5,
+            "op": "-",
+            "answer": 6,
+            "id": "11-5"
+          },
+          "timeMs": 885
+        },
+        {
+          "problem": {
+            "a": 19,
+            "b": 14,
+            "op": "+",
+            "answer": 33,
+            "id": "19+14"
+          },
+          "timeMs": 1955.3
+        },
+        {
+          "problem": {
+            "a": 14,
+            "b": 6,
+            "op": "-",
+            "answer": 8,
+            "id": "14-6"
+          },
+          "timeMs": 535.2
+        },
+        {
+          "problem": {
+            "a": 7,
+            "b": 2,
+            "op": "-",
+            "answer": 5,
+            "id": "7-2"
+          },
+          "timeMs": 1238.5
+        },
+        {
+          "problem": {
+            "a": 2,
+            "b": 7,
+            "op": "×",
+            "answer": 14,
+            "id": "2×7"
+          },
+          "timeMs": 1930.6
+        },
+        {
+          "problem": {
+            "a": 15,
+            "b": 11,
+            "op": "-",
+            "answer": 4,
+            "id": "15-11"
+          },
+          "timeMs": 1749.8
+        },
+        {
+          "problem": {
+            "a": 15,
+            "b": 13,
+            "op": "-",
+            "answer": 2,
+            "id": "15-13"
+          },
+          "timeMs": 321.1
+        },
+        {
+          "problem": {
+            "a": 35,
+            "b": 20,
+            "op": "-",
+            "answer": 15,
+            "id": "35-20"
+          },
+          "timeMs": 2471.7
+        },
+        {
+          "problem": {
+            "a": 14,
+            "b": 7,
+            "op": "÷",
+            "answer": 2,
+            "id": "14÷7"
+          },
+          "timeMs": 2285.7
+        },
+        {
+          "problem": {
+            "a": 2,
+            "b": 11,
+            "op": "×",
+            "answer": 22,
+            "id": "2×11"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 12,
+            "b": 3,
+            "op": "÷",
+            "answer": 4,
+            "id": "12÷3"
+          },
+          "timeMs": 971.5
+        },
+        {
+          "problem": {
+            "a": 10,
+            "b": 4,
+            "op": "-",
+            "answer": 6,
+            "id": "10-4"
+          },
+          "timeMs": 360.4
+        },
+        {
+          "problem": {
+            "a": 5,
+            "b": 18,
+            "op": "×",
+            "answer": 90,
+            "id": "5×18"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 2,
+            "b": 18,
+            "op": "×",
+            "answer": 36,
+            "id": "2×18"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 7,
+            "b": 3,
+            "op": "+",
+            "answer": 10,
+            "id": "7+3"
+          },
+          "timeMs": 2358.1
+        },
+        {
+          "problem": {
+            "a": 20,
+            "b": 8,
+            "op": "-",
+            "answer": 12,
+            "id": "20-8"
+          },
+          "timeMs": 2801.6
+        },
+        {
+          "problem": {
+            "a": 11,
+            "b": 19,
+            "op": "+",
+            "answer": 30,
+            "id": "11+19"
+          },
+          "timeMs": 2415.3
+        },
+        {
+          "problem": {
+            "a": 24,
+            "b": 4,
+            "op": "-",
+            "answer": 20,
+            "id": "24-4"
+          },
+          "timeMs": 1514.7
+        },
+        {
+          "problem": {
+            "a": 14,
+            "b": 10,
+            "op": "-",
+            "answer": 4,
+            "id": "14-10"
+          },
+          "timeMs": 885.4
+        }
+      ]
+    },
+    {
+      "id": "fixture-16",
+      "date": "2026-11-03T12:16:00.000Z",
+      "mode": "count",
+      "duration": 120,
+      "count": 10,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-16",
+      "elapsedMs": 16909.6,
+      "logs": [
+        {
+          "problem": {
+            "a": 352,
+            "b": 88,
+            "op": "÷",
+            "answer": 4,
+            "id": "352÷88"
+          },
+          "timeMs": 709
+        },
+        {
+          "problem": {
+            "a": 102,
+            "b": 66,
+            "op": "-",
+            "answer": 36,
+            "id": "102-66"
+          },
+          "timeMs": 2707.7
+        },
+        {
+          "problem": {
+            "a": 8,
+            "b": 62,
+            "op": "×",
+            "answer": 496,
+            "id": "8×62"
+          },
+          "timeMs": 1617.2
+        },
+        {
+          "problem": {
+            "a": 139,
+            "b": 58,
+            "op": "-",
+            "answer": 81,
+            "id": "139-58"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 10,
+            "b": 6,
+            "op": "-",
+            "answer": 4,
+            "id": "10-6"
+          },
+          "timeMs": 1991.2
+        },
+        {
+          "problem": {
+            "a": 8,
+            "b": 55,
+            "op": "×",
+            "answer": 440,
+            "id": "8×55"
+          },
+          "timeMs": 2099.8
+        },
+        {
+          "problem": {
+            "a": 72,
+            "b": 53,
+            "op": "-",
+            "answer": 19,
+            "id": "72-53"
+          },
+          "timeMs": 2825.6
+        },
+        {
+          "problem": {
+            "a": 55,
+            "b": 90,
+            "op": "+",
+            "answer": 145,
+            "id": "55+90"
+          },
+          "timeMs": 2054.9
+        },
+        {
+          "problem": {
+            "a": 388,
+            "b": 97,
+            "op": "÷",
+            "answer": 4,
+            "id": "388÷97"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 3,
+            "b": 67,
+            "op": "×",
+            "answer": 201,
+            "id": "3×67"
+          },
+          "timeMs": 2404.2
+        }
+      ]
+    },
+    {
+      "id": "fixture-15",
+      "date": "2026-11-02T12:15:00.000Z",
+      "mode": "time",
+      "duration": 15,
+      "count": 25,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-15",
+      "elapsedMs": 15000,
+      "logs": [
+        {
+          "problem": {
+            "a": 630,
+            "b": 63,
+            "op": "÷",
+            "answer": 10,
+            "id": "630÷63"
+          },
+          "timeMs": 1588.1
+        },
+        {
+          "problem": {
+            "a": 75,
+            "b": 71,
+            "op": "-",
+            "answer": 4,
+            "id": "75-71"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 93,
+            "b": 10,
+            "op": "-",
+            "answer": 83,
+            "id": "93-10"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 35,
+            "b": 73,
+            "op": "+",
+            "answer": 108,
+            "id": "35+73"
+          },
+          "timeMs": 2307.8
+        },
+        {
+          "problem": {
+            "a": 98,
+            "b": 4,
+            "op": "+",
+            "answer": 102,
+            "id": "98+4"
+          },
+          "timeMs": 1855.1
+        },
+        {
+          "problem": {
+            "a": 9,
+            "b": 100,
+            "op": "×",
+            "answer": 900,
+            "id": "9×100"
+          },
+          "timeMs": 1928.2
+        },
+        {
+          "problem": {
+            "a": 11,
+            "b": 93,
+            "op": "×",
+            "answer": 1023,
+            "id": "11×93"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 70,
+            "b": 54,
+            "op": "+",
+            "answer": 124,
+            "id": "70+54"
+          },
+          "timeMs": 2499
+        },
+        {
+          "problem": {
+            "a": 65,
+            "b": 17,
+            "op": "+",
+            "answer": 82,
+            "id": "65+17"
+          },
+          "timeMs": 2309
+        },
+        {
+          "problem": {
+            "a": 560,
+            "b": 70,
+            "op": "÷",
+            "answer": 8,
+            "id": "560÷70"
+          },
+          "timeMs": 706
+        }
+      ]
+    },
+    {
+      "id": "fixture-14",
+      "date": "2026-11-01T12:14:00.000Z",
+      "mode": "time",
+      "duration": 120,
+      "count": 25,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-14",
+      "elapsedMs": 120000,
+      "logs": [
+        {
+          "problem": {
+            "a": 90,
+            "b": 67,
+            "op": "-",
+            "answer": 23,
+            "id": "90-67"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 7,
+            "b": 29,
+            "op": "×",
+            "answer": 203,
+            "id": "7×29"
+          },
+          "timeMs": 250.1
+        },
+        {
+          "problem": {
+            "a": 65,
+            "b": 51,
+            "op": "-",
+            "answer": 14,
+            "id": "65-51"
+          },
+          "timeMs": 2026.7
+        },
+        {
+          "problem": {
+            "a": 146,
+            "b": 65,
+            "op": "-",
+            "answer": 81,
+            "id": "146-65"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 24,
+            "b": 2,
+            "op": "÷",
+            "answer": 12,
+            "id": "24÷2"
+          },
+          "timeMs": 1818.8
+        },
+        {
+          "problem": {
+            "a": 10,
+            "b": 99,
+            "op": "×",
+            "answer": 990,
+            "id": "10×99"
+          },
+          "timeMs": 1278.9
+        },
+        {
+          "problem": {
+            "a": 46,
+            "b": 23,
+            "op": "÷",
+            "answer": 2,
+            "id": "46÷23"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 29,
+            "b": 85,
+            "op": "+",
+            "answer": 114,
+            "id": "29+85"
+          },
+          "timeMs": 1062.6
+        },
+        {
+          "problem": {
+            "a": 9,
+            "b": 47,
+            "op": "×",
+            "answer": 423,
+            "id": "9×47"
+          },
+          "timeMs": 1151.5
+        },
+        {
+          "problem": {
+            "a": 86,
+            "b": 43,
+            "op": "÷",
+            "answer": 2,
+            "id": "86÷43"
+          },
+          "timeMs": 1742.3
+        },
+        {
+          "problem": {
+            "a": 3,
+            "b": 28,
+            "op": "×",
+            "answer": 84,
+            "id": "3×28"
+          },
+          "timeMs": 801.1
+        },
+        {
+          "problem": {
+            "a": 23,
+            "b": 45,
+            "op": "+",
+            "answer": 68,
+            "id": "23+45"
+          },
+          "timeMs": 2141.1
+        },
+        {
+          "problem": {
+            "a": 65,
+            "b": 89,
+            "op": "+",
+            "answer": 154,
+            "id": "65+89"
+          },
+          "timeMs": 1436.1
+        },
+        {
+          "problem": {
+            "a": 154,
+            "b": 77,
+            "op": "-",
+            "answer": 77,
+            "id": "154-77"
+          },
+          "timeMs": 1518.8
+        },
+        {
+          "problem": {
+            "a": 57,
+            "b": 87,
+            "op": "+",
+            "answer": 144,
+            "id": "57+87"
+          },
+          "timeMs": 1291.6
+        },
+        {
+          "problem": {
+            "a": 4,
+            "b": 32,
+            "op": "+",
+            "answer": 36,
+            "id": "4+32"
+          },
+          "timeMs": 1375.8
+        },
+        {
+          "problem": {
+            "a": 142,
+            "b": 97,
+            "op": "-",
+            "answer": 45,
+            "id": "142-97"
+          },
+          "timeMs": 2660.3
+        },
+        {
+          "problem": {
+            "a": 134,
+            "b": 98,
+            "op": "-",
+            "answer": 36,
+            "id": "134-98"
+          },
+          "timeMs": 1393.2
+        },
+        {
+          "problem": {
+            "a": 189,
+            "b": 21,
+            "op": "÷",
+            "answer": 9,
+            "id": "189÷21"
+          },
+          "timeMs": 1833
+        },
+        {
+          "problem": {
+            "a": 343,
+            "b": 49,
+            "op": "÷",
+            "answer": 7,
+            "id": "343÷49"
+          },
+          "timeMs": 2774.2
+        },
+        {
+          "problem": {
+            "a": 96,
+            "b": 21,
+            "op": "+",
+            "answer": 117,
+            "id": "96+21"
+          },
+          "timeMs": 1466
+        },
+        {
+          "problem": {
+            "a": 110,
+            "b": 62,
+            "op": "-",
+            "answer": 48,
+            "id": "110-62"
+          },
+          "timeMs": 2339.6
+        },
+        {
+          "problem": {
+            "a": 196,
+            "b": 49,
+            "op": "÷",
+            "answer": 4,
+            "id": "196÷49"
+          },
+          "timeMs": 893.6
+        },
+        {
+          "problem": {
+            "a": 5,
+            "b": 26,
+            "op": "×",
+            "answer": 130,
+            "id": "5×26"
+          },
+          "timeMs": 348.3
+        },
+        {
+          "problem": {
+            "a": 174,
+            "b": 90,
+            "op": "-",
+            "answer": 84,
+            "id": "174-90"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 3,
+            "b": 18,
+            "op": "+",
+            "answer": 21,
+            "id": "3+18"
+          },
+          "timeMs": 268.3
+        },
+        {
+          "problem": {
+            "a": 90,
+            "b": 52,
+            "op": "-",
+            "answer": 38,
+            "id": "90-52"
+          },
+          "timeMs": 2901.3
+        },
+        {
+          "problem": {
+            "a": 92,
+            "b": 68,
+            "op": "-",
+            "answer": 24,
+            "id": "92-68"
+          },
+          "timeMs": 2213.4
+        },
+        {
+          "problem": {
+            "a": 117,
+            "b": 91,
+            "op": "-",
+            "answer": 26,
+            "id": "117-91"
+          },
+          "timeMs": 1329.9
+        },
+        {
+          "problem": {
+            "a": 175,
+            "b": 25,
+            "op": "÷",
+            "answer": 7,
+            "id": "175÷25"
+          },
+          "timeMs": 2577.7
+        },
+        {
+          "problem": {
+            "a": 35,
+            "b": 79,
+            "op": "+",
+            "answer": 114,
+            "id": "35+79"
+          },
+          "timeMs": 2648.2
+        },
+        {
+          "problem": {
+            "a": 22,
+            "b": 25,
+            "op": "+",
+            "answer": 47,
+            "id": "22+25"
+          },
+          "timeMs": 2712.1
+        },
+        {
+          "problem": {
+            "a": 14,
+            "b": 3,
+            "op": "-",
+            "answer": 11,
+            "id": "14-3"
+          },
+          "timeMs": 1446.6
+        },
+        {
+          "problem": {
+            "a": 8,
+            "b": 35,
+            "op": "×",
+            "answer": 280,
+            "id": "8×35"
+          },
+          "timeMs": 2490.7
+        },
+        {
+          "problem": {
+            "a": 2,
+            "b": 8,
+            "op": "×",
+            "answer": 16,
+            "id": "2×8"
+          },
+          "timeMs": 1846.4
+        },
+        {
+          "problem": {
+            "a": 37,
+            "b": 50,
+            "op": "+",
+            "answer": 87,
+            "id": "37+50"
+          },
+          "timeMs": 2615.8
+        },
+        {
+          "problem": {
+            "a": 43,
+            "b": 71,
+            "op": "+",
+            "answer": 114,
+            "id": "43+71"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 8,
+            "b": 75,
+            "op": "×",
+            "answer": 600,
+            "id": "8×75"
+          },
+          "timeMs": 1582
+        },
+        {
+          "problem": {
+            "a": 4,
+            "b": 18,
+            "op": "+",
+            "answer": 22,
+            "id": "4+18"
+          },
+          "timeMs": 2581.5
+        },
+        {
+          "problem": {
+            "a": 7,
+            "b": 28,
+            "op": "×",
+            "answer": 196,
+            "id": "7×28"
+          },
+          "timeMs": 1829.1
+        },
+        {
+          "problem": {
+            "a": 738,
+            "b": 82,
+            "op": "÷",
+            "answer": 9,
+            "id": "738÷82"
+          },
+          "timeMs": 592.8
+        },
+        {
+          "problem": {
+            "a": 100,
+            "b": 45,
+            "op": "+",
+            "answer": 145,
+            "id": "100+45"
+          },
+          "timeMs": 2471.6
+        },
+        {
+          "problem": {
+            "a": 444,
+            "b": 74,
+            "op": "÷",
+            "answer": 6,
+            "id": "444÷74"
+          },
+          "timeMs": 1390.2
+        },
+        {
+          "problem": {
+            "a": 80,
+            "b": 49,
+            "op": "+",
+            "answer": 129,
+            "id": "80+49"
+          },
+          "timeMs": 559.2
+        },
+        {
+          "problem": {
+            "a": 2,
+            "b": 26,
+            "op": "×",
+            "answer": 52,
+            "id": "2×26"
+          },
+          "timeMs": 2526.2
+        },
+        {
+          "problem": {
+            "a": 130,
+            "b": 13,
+            "op": "÷",
+            "answer": 10,
+            "id": "130÷13"
+          },
+          "timeMs": 1756.5
+        },
+        {
+          "problem": {
+            "a": 165,
+            "b": 80,
+            "op": "-",
+            "answer": 85,
+            "id": "165-80"
+          },
+          "timeMs": 1828.9
+        },
+        {
+          "problem": {
+            "a": 8,
+            "b": 87,
+            "op": "×",
+            "answer": 696,
+            "id": "8×87"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 30,
+            "b": 15,
+            "op": "+",
+            "answer": 45,
+            "id": "30+15"
+          },
+          "timeMs": 971.5
+        },
+        {
+          "problem": {
+            "a": 210,
+            "b": 35,
+            "op": "÷",
+            "answer": 6,
+            "id": "210÷35"
+          },
+          "timeMs": 1964.7
+        },
+        {
+          "problem": {
+            "a": 91,
+            "b": 6,
+            "op": "-",
+            "answer": 85,
+            "id": "91-6"
+          },
+          "timeMs": 1524.1
+        },
+        {
+          "problem": {
+            "a": 48,
+            "b": 25,
+            "op": "+",
+            "answer": 73,
+            "id": "48+25"
+          },
+          "timeMs": 2825.4
+        },
+        {
+          "problem": {
+            "a": 473,
+            "b": 43,
+            "op": "÷",
+            "answer": 11,
+            "id": "473÷43"
+          },
+          "timeMs": 1138.3
+        },
+        {
+          "problem": {
+            "a": 164,
+            "b": 41,
+            "op": "÷",
+            "answer": 4,
+            "id": "164÷41"
+          },
+          "timeMs": 2991.6
+        },
+        {
+          "problem": {
+            "a": 4,
+            "b": 16,
+            "op": "×",
+            "answer": 64,
+            "id": "4×16"
+          },
+          "timeMs": 2569.8
+        },
+        {
+          "problem": {
+            "a": 81,
+            "b": 22,
+            "op": "+",
+            "answer": 103,
+            "id": "81+22"
+          },
+          "timeMs": 2728.4
+        },
+        {
+          "problem": {
+            "a": 87,
+            "b": 15,
+            "op": "+",
+            "answer": 102,
+            "id": "87+15"
+          },
+          "timeMs": 655.7
+        },
+        {
+          "problem": {
+            "a": 11,
+            "b": 22,
+            "op": "+",
+            "answer": 33,
+            "id": "11+22"
+          },
+          "timeMs": 1527.9
+        },
+        {
+          "problem": {
+            "a": 4,
+            "b": 62,
+            "op": "×",
+            "answer": 248,
+            "id": "4×62"
+          },
+          "timeMs": 2267.5
+        },
+        {
+          "problem": {
+            "a": 62,
+            "b": 85,
+            "op": "+",
+            "answer": 147,
+            "id": "62+85"
+          },
+          "timeMs": 2132
+        },
+        {
+          "problem": {
+            "a": 3,
+            "b": 99,
+            "op": "×",
+            "answer": 297,
+            "id": "3×99"
+          },
+          "timeMs": 566.6
+        },
+        {
+          "problem": {
+            "a": 11,
+            "b": 53,
+            "op": "×",
+            "answer": 583,
+            "id": "11×53"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 47,
+            "b": 89,
+            "op": "+",
+            "answer": 136,
+            "id": "47+89"
+          },
+          "timeMs": 810.2
+        },
+        {
+          "problem": {
+            "a": 81,
+            "b": 16,
+            "op": "+",
+            "answer": 97,
+            "id": "81+16"
+          },
+          "timeMs": 2672.9
+        },
+        {
+          "problem": {
+            "a": 168,
+            "b": 83,
+            "op": "-",
+            "answer": 85,
+            "id": "168-83"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 21,
+            "b": 7,
+            "op": "÷",
+            "answer": 3,
+            "id": "21÷7"
+          },
+          "timeMs": 1983.5
+        },
+        {
+          "problem": {
+            "a": 91,
+            "b": 61,
+            "op": "+",
+            "answer": 152,
+            "id": "91+61"
+          },
+          "timeMs": 1161.1
+        },
+        {
+          "problem": {
+            "a": 7,
+            "b": 72,
+            "op": "×",
+            "answer": 504,
+            "id": "7×72"
+          },
+          "timeMs": 874.5
+        },
+        {
+          "problem": {
+            "a": 19,
+            "b": 95,
+            "op": "+",
+            "answer": 114,
+            "id": "19+95"
+          },
+          "timeMs": 2941
+        },
+        {
+          "problem": {
+            "a": 594,
+            "b": 99,
+            "op": "÷",
+            "answer": 6,
+            "id": "594÷99"
+          },
+          "timeMs": 998
+        },
+        {
+          "problem": {
+            "a": 1068,
+            "b": 89,
+            "op": "÷",
+            "answer": 12,
+            "id": "1068÷89"
+          },
+          "timeMs": 400.6
+        },
+        {
+          "problem": {
+            "a": 711,
+            "b": 79,
+            "op": "÷",
+            "answer": 9,
+            "id": "711÷79"
+          },
+          "timeMs": 2592.6
+        },
+        {
+          "problem": {
+            "a": 168,
+            "b": 93,
+            "op": "-",
+            "answer": 75,
+            "id": "168-93"
+          },
+          "timeMs": 285.9
+        },
+        {
+          "problem": {
+            "a": 9,
+            "b": 73,
+            "op": "×",
+            "answer": 657,
+            "id": "9×73"
+          },
+          "timeMs": 1538.9
+        },
+        {
+          "problem": {
+            "a": 329,
+            "b": 47,
+            "op": "÷",
+            "answer": 7,
+            "id": "329÷47"
+          },
+          "timeMs": 2889
+        },
+        {
+          "problem": {
+            "a": 957,
+            "b": 87,
+            "op": "÷",
+            "answer": 11,
+            "id": "957÷87"
+          },
+          "timeMs": 1852.2
+        }
+      ]
+    },
+    {
+      "id": "fixture-13",
+      "date": "2026-10-31T12:13:00.000Z",
+      "mode": "count",
+      "duration": 120,
+      "count": 10,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-13",
+      "elapsedMs": 17215.6,
+      "logs": [
+        {
+          "problem": {
+            "a": 3,
+            "b": 75,
+            "op": "×",
+            "answer": 225,
+            "id": "3×75"
+          },
+          "timeMs": 978.2
+        },
+        {
+          "problem": {
+            "a": 142,
+            "b": 73,
+            "op": "-",
+            "answer": 69,
+            "id": "142-73"
+          },
+          "timeMs": 692.4
+        },
+        {
+          "problem": {
+            "a": 5,
+            "b": 74,
+            "op": "×",
+            "answer": 370,
+            "id": "5×74"
+          },
+          "timeMs": 357.8
+        },
+        {
+          "problem": {
+            "a": 145,
+            "b": 29,
+            "op": "÷",
+            "answer": 5,
+            "id": "145÷29"
+          },
+          "timeMs": 2291.8
+        },
+        {
+          "problem": {
+            "a": 120,
+            "b": 60,
+            "op": "÷",
+            "answer": 2,
+            "id": "120÷60"
+          },
+          "timeMs": 1258.7
+        },
+        {
+          "problem": {
+            "a": 399,
+            "b": 57,
+            "op": "÷",
+            "answer": 7,
+            "id": "399÷57"
+          },
+          "timeMs": 2709.3
+        },
+        {
+          "problem": {
+            "a": 630,
+            "b": 70,
+            "op": "÷",
+            "answer": 9,
+            "id": "630÷70"
+          },
+          "timeMs": 1700.4
+        },
+        {
+          "problem": {
+            "a": 1176,
+            "b": 98,
+            "op": "÷",
+            "answer": 12,
+            "id": "1176÷98"
+          },
+          "timeMs": 2254.6
+        },
+        {
+          "problem": {
+            "a": 3,
+            "b": 61,
+            "op": "+",
+            "answer": 64,
+            "id": "3+61"
+          },
+          "timeMs": 2178.4
+        },
+        {
+          "problem": {
+            "a": 420,
+            "b": 60,
+            "op": "÷",
+            "answer": 7,
+            "id": "420÷60"
+          },
+          "timeMs": 2794
+        }
+      ],
+      "drill": true
+    },
+    {
+      "id": "fixture-12",
+      "date": "2026-10-30T12:12:00.000Z",
+      "mode": "count",
+      "duration": 120,
+      "count": 50,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-12",
+      "elapsedMs": 37911.5,
+      "logs": [
+        {
+          "problem": {
+            "a": 168,
+            "b": 84,
+            "op": "÷",
+            "answer": 2,
+            "id": "168÷84"
+          },
+          "timeMs": 1120.9
+        },
+        {
+          "problem": {
+            "a": 11,
+            "b": 82,
+            "op": "×",
+            "answer": 902,
+            "id": "11×82"
+          },
+          "timeMs": 1940.1
+        },
+        {
+          "problem": {
+            "a": 19,
+            "b": 43,
+            "op": "+",
+            "answer": 62,
+            "id": "19+43"
+          },
+          "timeMs": 1884.1
+        },
+        {
+          "problem": {
+            "a": 672,
+            "b": 56,
+            "op": "÷",
+            "answer": 12,
+            "id": "672÷56"
+          },
+          "timeMs": 1216.3
+        },
+        {
+          "problem": {
+            "a": 3,
+            "b": 24,
+            "op": "×",
+            "answer": 72,
+            "id": "3×24"
+          },
+          "timeMs": 1741.3
+        },
+        {
+          "problem": {
+            "a": 150,
+            "b": 25,
+            "op": "÷",
+            "answer": 6,
+            "id": "150÷25"
+          },
+          "timeMs": 2932.4
+        },
+        {
+          "problem": {
+            "a": 74,
+            "b": 10,
+            "op": "-",
+            "answer": 64,
+            "id": "74-10"
+          },
+          "timeMs": 1743.6
+        },
+        {
+          "problem": {
+            "a": 455,
+            "b": 91,
+            "op": "÷",
+            "answer": 5,
+            "id": "455÷91"
+          },
+          "timeMs": 2356.3
+        },
+        {
+          "problem": {
+            "a": 107,
+            "b": 9,
+            "op": "-",
+            "answer": 98,
+            "id": "107-9"
+          },
+          "timeMs": 3116.8
+        },
+        {
+          "problem": {
+            "a": 74,
+            "b": 57,
+            "op": "-",
+            "answer": 17,
+            "id": "74-57"
+          },
+          "timeMs": 1740.1
+        },
+        {
+          "problem": {
+            "a": 60,
+            "b": 92,
+            "op": "+",
+            "answer": 152,
+            "id": "60+92"
+          },
+          "timeMs": 2891.1
+        },
+        {
+          "problem": {
+            "a": 15,
+            "b": 77,
+            "op": "+",
+            "answer": 92,
+            "id": "15+77"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 1045,
+            "b": 95,
+            "op": "÷",
+            "answer": 11,
+            "id": "1045÷95"
+          },
+          "timeMs": 1144.7
+        },
+        {
+          "problem": {
+            "a": 426,
+            "b": 71,
+            "op": "÷",
+            "answer": 6,
+            "id": "426÷71"
+          },
+          "timeMs": 778.7
+        },
+        {
+          "problem": {
+            "a": 312,
+            "b": 39,
+            "op": "÷",
+            "answer": 8,
+            "id": "312÷39"
+          },
+          "timeMs": 622.4
+        },
+        {
+          "problem": {
+            "a": 64,
+            "b": 14,
+            "op": "+",
+            "answer": 78,
+            "id": "64+14"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 80,
+            "b": 10,
+            "op": "÷",
+            "answer": 8,
+            "id": "80÷10"
+          },
+          "timeMs": 1666.4
+        },
+        {
+          "problem": {
+            "a": 5,
+            "b": 19,
+            "op": "×",
+            "answer": 95,
+            "id": "5×19"
+          },
+          "timeMs": 1945.9
+        },
+        {
+          "problem": {
+            "a": 36,
+            "b": 9,
+            "op": "+",
+            "answer": 45,
+            "id": "36+9"
+          },
+          "timeMs": 2772.5
+        },
+        {
+          "problem": {
+            "a": 609,
+            "b": 87,
+            "op": "÷",
+            "answer": 7,
+            "id": "609÷87"
+          },
+          "timeMs": 1283.8
+        },
+        {
+          "problem": {
+            "a": 123,
+            "b": 23,
+            "op": "-",
+            "answer": 100,
+            "id": "123-23"
+          },
+          "timeMs": 399
+        },
+        {
+          "problem": {
+            "a": 12,
+            "b": 70,
+            "op": "×",
+            "answer": 840,
+            "id": "12×70"
+          },
+          "timeMs": 942.1
+        },
+        {
+          "problem": {
+            "a": 14,
+            "b": 2,
+            "op": "÷",
+            "answer": 7,
+            "id": "14÷2"
+          },
+          "timeMs": 680.6
+        },
+        {
+          "problem": {
+            "a": 114,
+            "b": 38,
+            "op": "÷",
+            "answer": 3,
+            "id": "114÷38"
+          },
+          "timeMs": 408.6
+        },
+        {
+          "problem": {
+            "a": 113,
+            "b": 28,
+            "op": "-",
+            "answer": 85,
+            "id": "113-28"
+          },
+          "timeMs": 2083.8
+        }
+      ]
+    },
+    {
+      "id": "fixture-11",
+      "date": "2026-10-20T12:11:00.000Z",
+      "mode": "time",
+      "duration": 60,
+      "count": 25,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-11",
+      "elapsedMs": 36000.5,
+      "logs": [
+        {
+          "problem": {
+            "a": 11,
+            "b": 82,
+            "op": "×",
+            "answer": 902,
+            "id": "11×82"
+          },
+          "timeMs": 1470.4
+        },
+        {
+          "problem": {
+            "a": 46,
+            "b": 25,
+            "op": "+",
+            "answer": 71,
+            "id": "46+25"
+          },
+          "timeMs": 3113
+        },
+        {
+          "problem": {
+            "a": 42,
+            "b": 11,
+            "op": "+",
+            "answer": 53,
+            "id": "42+11"
+          },
+          "timeMs": 983.7
+        },
+        {
+          "problem": {
+            "a": 570,
+            "b": 95,
+            "op": "÷",
+            "answer": 6,
+            "id": "570÷95"
+          },
+          "timeMs": 2485
+        },
+        {
+          "problem": {
+            "a": 840,
+            "b": 70,
+            "op": "÷",
+            "answer": 12,
+            "id": "840÷70"
+          },
+          "timeMs": 1111.4
+        },
+        {
+          "problem": {
+            "a": 168,
+            "b": 84,
+            "op": "÷",
+            "answer": 2,
+            "id": "168÷84"
+          },
+          "timeMs": 1526
+        },
+        {
+          "problem": {
+            "a": 75,
+            "b": 33,
+            "op": "+",
+            "answer": 108,
+            "id": "75+33"
+          },
+          "timeMs": 2915.1
+        },
+        {
+          "problem": {
+            "a": 3,
+            "b": 78,
+            "op": "×",
+            "answer": 234,
+            "id": "3×78"
+          },
+          "timeMs": 2239.6
+        },
+        {
+          "problem": {
+            "a": 1116,
+            "b": 93,
+            "op": "÷",
+            "answer": 12,
+            "id": "1116÷93"
+          },
+          "timeMs": 1738.4
+        },
+        {
+          "problem": {
+            "a": 8,
+            "b": 38,
+            "op": "×",
+            "answer": 304,
+            "id": "8×38"
+          },
+          "timeMs": 2248.6
+        },
+        {
+          "problem": {
+            "a": 55,
+            "b": 15,
+            "op": "-",
+            "answer": 40,
+            "id": "55-15"
+          },
+          "timeMs": 1330.3
+        },
+        {
+          "problem": {
+            "a": 86,
+            "b": 61,
+            "op": "+",
+            "answer": 147,
+            "id": "86+61"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 4,
+            "b": 14,
+            "op": "×",
+            "answer": 56,
+            "id": "4×14"
+          },
+          "timeMs": 2326.9
+        },
+        {
+          "problem": {
+            "a": 10,
+            "b": 51,
+            "op": "×",
+            "answer": 510,
+            "id": "10×51"
+          },
+          "timeMs": 1684.1
+        },
+        {
+          "problem": {
+            "a": 105,
+            "b": 36,
+            "op": "-",
+            "answer": 69,
+            "id": "105-36"
+          },
+          "timeMs": 1747.8
+        },
+        {
+          "problem": {
+            "a": 108,
+            "b": 18,
+            "op": "÷",
+            "answer": 6,
+            "id": "108÷18"
+          },
+          "timeMs": 1408.5
+        },
+        {
+          "problem": {
+            "a": 53,
+            "b": 95,
+            "op": "+",
+            "answer": 148,
+            "id": "53+95"
+          },
+          "timeMs": 1478.9
+        },
+        {
+          "problem": {
+            "a": 68,
+            "b": 7,
+            "op": "+",
+            "answer": 75,
+            "id": "68+7"
+          },
+          "timeMs": 2647.3
+        },
+        {
+          "problem": {
+            "a": 153,
+            "b": 54,
+            "op": "-",
+            "answer": 99,
+            "id": "153-54"
+          },
+          "timeMs": 2288.9
+        },
+        {
+          "problem": {
+            "a": 144,
+            "b": 18,
+            "op": "÷",
+            "answer": 8,
+            "id": "144÷18"
+          },
+          "timeMs": 250
+        }
+      ]
+    },
+    {
+      "id": "fixture-10",
+      "date": "2026-10-13T12:10:00.000Z",
+      "mode": "count",
+      "duration": 120,
+      "count": 10,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 20,
+          "minB": 2,
+          "maxB": 20
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 20,
+          "minB": 2,
+          "maxB": 20
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 5,
+          "minB": 2,
+          "maxB": 20
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 5,
+          "minB": 2,
+          "maxB": 20
+        }
+      },
+      "seed": "seed-10",
+      "elapsedMs": 13872.5,
+      "logs": [
+        {
+          "problem": {
+            "a": 90,
+            "b": 18,
+            "op": "÷",
+            "answer": 5,
+            "id": "90÷18"
+          },
+          "timeMs": 723.2
+        },
+        {
+          "problem": {
+            "a": 10,
+            "b": 7,
+            "op": "+",
+            "answer": 17,
+            "id": "10+7"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 37,
+            "b": 18,
+            "op": "-",
+            "answer": 19,
+            "id": "37-18"
+          },
+          "timeMs": 581.6
+        },
+        {
+          "problem": {
+            "a": 3,
+            "b": 18,
+            "op": "×",
+            "answer": 54,
+            "id": "3×18"
+          },
+          "timeMs": 2594.1
+        },
+        {
+          "problem": {
+            "a": 56,
+            "b": 14,
+            "op": "÷",
+            "answer": 4,
+            "id": "56÷14"
+          },
+          "timeMs": 2540
+        },
+        {
+          "problem": {
+            "a": 42,
+            "b": 14,
+            "op": "÷",
+            "answer": 3,
+            "id": "42÷14"
+          },
+          "timeMs": 512.5
+        },
+        {
+          "problem": {
+            "a": 5,
+            "b": 4,
+            "op": "×",
+            "answer": 20,
+            "id": "5×4"
+          },
+          "timeMs": 621.5
+        },
+        {
+          "problem": {
+            "a": 14,
+            "b": 14,
+            "op": "+",
+            "answer": 28,
+            "id": "14+14"
+          },
+          "timeMs": 2913.4
+        },
+        {
+          "problem": {
+            "a": 24,
+            "b": 8,
+            "op": "÷",
+            "answer": 3,
+            "id": "24÷8"
+          },
+          "timeMs": 2741.7
+        },
+        {
+          "problem": {
+            "a": 23,
+            "b": 20,
+            "op": "-",
+            "answer": 3,
+            "id": "23-20"
+          },
+          "timeMs": 394.5
+        }
+      ]
+    },
+    {
+      "id": "fixture-09",
+      "date": "2026-10-12T12:09:00.000Z",
+      "mode": "time",
+      "duration": 15,
+      "count": 25,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 20,
+          "minB": 2,
+          "maxB": 20
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 20,
+          "minB": 2,
+          "maxB": 20
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 5,
+          "minB": 2,
+          "maxB": 20
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 5,
+          "minB": 2,
+          "maxB": 20
+        }
+      },
+      "seed": "seed-9",
+      "elapsedMs": 15000,
+      "logs": [
+        {
+          "problem": {
+            "a": 75,
+            "b": 15,
+            "op": "÷",
+            "answer": 5,
+            "id": "75÷15"
+          },
+          "timeMs": 839.9
+        },
+        {
+          "problem": {
+            "a": 15,
+            "b": 19,
+            "op": "+",
+            "answer": 34,
+            "id": "15+19"
+          },
+          "timeMs": 2327.1
+        },
+        {
+          "problem": {
+            "a": 4,
+            "b": 20,
+            "op": "×",
+            "answer": 80,
+            "id": "4×20"
+          },
+          "timeMs": 375.2
+        },
+        {
+          "problem": {
+            "a": 22,
+            "b": 19,
+            "op": "-",
+            "answer": 3,
+            "id": "22-19"
+          },
+          "timeMs": 3091.4
+        },
+        {
+          "problem": {
+            "a": 13,
+            "b": 3,
+            "op": "+",
+            "answer": 16,
+            "id": "13+3"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 2,
+            "b": 16,
+            "op": "+",
+            "answer": 18,
+            "id": "2+16"
+          },
+          "timeMs": 2075.4
+        },
+        {
+          "problem": {
+            "a": 16,
+            "b": 3,
+            "op": "+",
+            "answer": 19,
+            "id": "16+3"
+          },
+          "timeMs": 1591.1
+        },
+        {
+          "problem": {
+            "a": 39,
+            "b": 13,
+            "op": "÷",
+            "answer": 3,
+            "id": "39÷13"
+          },
+          "timeMs": 1814.2
+        },
+        {
+          "problem": {
+            "a": 12,
+            "b": 4,
+            "op": "÷",
+            "answer": 3,
+            "id": "12÷4"
+          },
+          "timeMs": 919.8
+        }
+      ]
+    },
+    {
+      "id": "fixture-08",
+      "date": "2026-10-05T12:08:00.000Z",
+      "mode": "custom",
+      "duration": 45,
+      "count": 25,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 2.5,
+          "minA": 2,
+          "maxA": 15,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-8",
+      "elapsedMs": 45000,
+      "logs": [
+        {
+          "problem": {
+            "a": 126,
+            "b": 42,
+            "op": "÷",
+            "answer": 3,
+            "id": "126÷42"
+          },
+          "timeMs": 1706.9
+        },
+        {
+          "problem": {
+            "a": 2,
+            "b": 45,
+            "op": "×",
+            "answer": 90,
+            "id": "2×45"
+          },
+          "timeMs": 1756.6
+        },
+        {
+          "problem": {
+            "a": 91,
+            "b": 43,
+            "op": "+",
+            "answer": 134,
+            "id": "91+43"
+          },
+          "timeMs": 889.9
+        },
+        {
+          "problem": {
+            "a": 6,
+            "b": 53,
+            "op": "×",
+            "answer": 318,
+            "id": "6×53"
+          },
+          "timeMs": 2163.6
+        },
+        {
+          "problem": {
+            "a": 882,
+            "b": 98,
+            "op": "÷",
+            "answer": 9,
+            "id": "882÷98"
+          },
+          "timeMs": 547.5
+        },
+        {
+          "problem": {
+            "a": 13,
+            "b": 10,
+            "op": "+",
+            "answer": 23,
+            "id": "13+10"
+          },
+          "timeMs": 2082.1
+        },
+        {
+          "problem": {
+            "a": 8,
+            "b": 20,
+            "op": "×",
+            "answer": 160,
+            "id": "8×20"
+          },
+          "timeMs": 1245.9
+        },
+        {
+          "problem": {
+            "a": 66,
+            "b": 77,
+            "op": "+",
+            "answer": 143,
+            "id": "66+77"
+          },
+          "timeMs": 2102.4
+        },
+        {
+          "problem": {
+            "a": 5,
+            "b": 95,
+            "op": "×",
+            "answer": 475,
+            "id": "5×95"
+          },
+          "timeMs": 250
+        },
+        {
+          "problem": {
+            "a": 3,
+            "b": 17,
+            "op": "×",
+            "answer": 51,
+            "id": "3×17"
+          },
+          "timeMs": 1591.8
+        },
+        {
+          "problem": {
+            "a": 14,
+            "b": 15,
+            "op": "×",
+            "answer": 210,
+            "id": "14×15"
+          },
+          "timeMs": 2460.2
+        },
+        {
+          "problem": {
+            "a": 10,
+            "b": 31,
+            "op": "+",
+            "answer": 41,
+            "id": "10+31"
+          },
+          "timeMs": 397.4
+        },
+        {
+          "problem": {
+            "a": 15,
+            "b": 62,
+            "op": "×",
+            "answer": 930,
+            "id": "15×62"
+          },
+          "timeMs": 2474.7
+        },
+        {
+          "problem": {
+            "a": 512,
+            "b": 64,
+            "op": "÷",
+            "answer": 8,
+            "id": "512÷64"
+          },
+          "timeMs": 2781.4
+        },
+        {
+          "problem": {
+            "a": 74,
+            "b": 68,
+            "op": "+",
+            "answer": 142,
+            "id": "74+68"
+          },
+          "timeMs": 2734
+        },
+        {
+          "problem": {
+            "a": 12,
+            "b": 80,
+            "op": "×",
+            "answer": 960,
+            "id": "12×80"
+          },
+          "timeMs": 2603.2
+        },
+        {
+          "problem": {
+            "a": 98,
+            "b": 96,
+            "op": "+",
+            "answer": 194,
+            "id": "98+96"
+          },
+          "timeMs": 3185.8
+        },
+        {
+          "problem": {
+            "a": 79,
+            "b": 71,
+            "op": "-",
+            "answer": 8,
+            "id": "79-71"
+          },
+          "timeMs": 1610.2
+        },
+        {
+          "problem": {
+            "a": 15,
+            "b": 44,
+            "op": "×",
+            "answer": 660,
+            "id": "15×44"
+          },
+          "timeMs": 1484.4
+        },
+        {
+          "problem": {
+            "a": 180,
+            "b": 30,
+            "op": "÷",
+            "answer": 6,
+            "id": "180÷30"
+          },
+          "timeMs": 752.4
+        },
+        {
+          "problem": {
+            "a": 120,
+            "b": 30,
+            "op": "÷",
+            "answer": 4,
+            "id": "120÷30"
+          },
+          "timeMs": 1109
+        },
+        {
+          "problem": {
+            "a": 2,
+            "b": 88,
+            "op": "×",
+            "answer": 176,
+            "id": "2×88"
+          },
+          "timeMs": 349.1
+        },
+        {
+          "problem": {
+            "a": 9,
+            "b": 48,
+            "op": "×",
+            "answer": 432,
+            "id": "9×48"
+          },
+          "timeMs": 2141.7
+        },
+        {
+          "problem": {
+            "a": 35,
+            "b": 5,
+            "op": "÷",
+            "answer": 7,
+            "id": "35÷5"
+          },
+          "timeMs": 2485.9
+        },
+        {
+          "problem": {
+            "a": 2,
+            "b": 64,
+            "op": "×",
+            "answer": 128,
+            "id": "2×64"
+          },
+          "timeMs": 2755.3
+        }
+      ]
+    },
+    {
+      "id": "fixture-07",
+      "date": "2026-10-04T12:07:00.000Z",
+      "mode": "custom",
+      "duration": 120,
+      "count": 12,
+      "customKind": "count",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 2.5,
+          "minA": 2,
+          "maxA": 15,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-7",
+      "elapsedMs": 26355.7,
+      "logs": [
+        {
+          "problem": {
+            "a": 62,
+            "b": 39,
+            "op": "-",
+            "answer": 23,
+            "id": "62-39"
+          },
+          "timeMs": 2894.1
+        },
+        {
+          "problem": {
+            "a": 15,
+            "b": 7,
+            "op": "×",
+            "answer": 105,
+            "id": "15×7"
+          },
+          "timeMs": 2913.8
+        },
+        {
+          "problem": {
+            "a": 6,
+            "b": 81,
+            "op": "×",
+            "answer": 486,
+            "id": "6×81"
+          },
+          "timeMs": 2696
+        },
+        {
+          "problem": {
+            "a": 6,
+            "b": 21,
+            "op": "×",
+            "answer": 126,
+            "id": "6×21"
+          },
+          "timeMs": 2764
+        },
+        {
+          "problem": {
+            "a": 7,
+            "b": 70,
+            "op": "×",
+            "answer": 490,
+            "id": "7×70"
+          },
+          "timeMs": 2539.4
+        },
+        {
+          "problem": {
+            "a": 9,
+            "b": 48,
+            "op": "×",
+            "answer": 432,
+            "id": "9×48"
+          },
+          "timeMs": 2825.4
+        },
+        {
+          "problem": {
+            "a": 8,
+            "b": 52,
+            "op": "×",
+            "answer": 416,
+            "id": "8×52"
+          },
+          "timeMs": 1968.7
+        },
+        {
+          "problem": {
+            "a": 4,
+            "b": 83,
+            "op": "×",
+            "answer": 332,
+            "id": "4×83"
+          },
+          "timeMs": 1239
+        },
+        {
+          "problem": {
+            "a": 78,
+            "b": 17,
+            "op": "+",
+            "answer": 95,
+            "id": "78+17"
+          },
+          "timeMs": 691.5
+        },
+        {
+          "problem": {
+            "a": 152,
+            "b": 100,
+            "op": "-",
+            "answer": 52,
+            "id": "152-100"
+          },
+          "timeMs": 2447.3
+        },
+        {
+          "problem": {
+            "a": 45,
+            "b": 32,
+            "op": "-",
+            "answer": 13,
+            "id": "45-32"
+          },
+          "timeMs": 1782.7
+        },
+        {
+          "problem": {
+            "a": 87,
+            "b": 56,
+            "op": "-",
+            "answer": 31,
+            "id": "87-56"
+          },
+          "timeMs": 1593.8
+        }
+      ]
+    },
+    {
+      "id": "fixture-06",
+      "date": "2026-10-04T12:06:00.000Z",
+      "mode": "zen",
+      "duration": 120,
+      "count": 25,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-6",
+      "elapsedMs": 45267.4,
+      "logs": [
+        {
+          "problem": {
+            "a": 7,
+            "b": 85,
+            "op": "×",
+            "answer": 595,
+            "id": "7×85"
+          },
+          "timeMs": 2459.1
+        },
+        {
+          "problem": {
+            "a": 80,
+            "b": 70,
+            "op": "-",
+            "answer": 10,
+            "id": "80-70"
+          },
+          "timeMs": 2460
+        },
+        {
+          "problem": {
+            "a": 68,
+            "b": 99,
+            "op": "+",
+            "answer": 167,
+            "id": "68+99"
+          },
+          "timeMs": 3318.2
+        },
+        {
+          "problem": {
+            "a": 6,
+            "b": 68,
+            "op": "×",
+            "answer": 408,
+            "id": "6×68"
+          },
+          "timeMs": 872.8
+        },
+        {
+          "problem": {
+            "a": 65,
+            "b": 13,
+            "op": "+",
+            "answer": 78,
+            "id": "65+13"
+          },
+          "timeMs": 2017.6
+        },
+        {
+          "problem": {
+            "a": 46,
+            "b": 24,
+            "op": "-",
+            "answer": 22,
+            "id": "46-24"
+          },
+          "timeMs": 510.2
+        },
+        {
+          "problem": {
+            "a": 78,
+            "b": 6,
+            "op": "-",
+            "answer": 72,
+            "id": "78-6"
+          },
+          "timeMs": 1446.2
+        },
+        {
+          "problem": {
+            "a": 48,
+            "b": 99,
+            "op": "+",
+            "answer": 147,
+            "id": "48+99"
+          },
+          "timeMs": 2406.2
+        },
+        {
+          "problem": {
+            "a": 288,
+            "b": 36,
+            "op": "÷",
+            "answer": 8,
+            "id": "288÷36"
+          },
+          "timeMs": 2156.1
+        },
+        {
+          "problem": {
+            "a": 14,
+            "b": 70,
+            "op": "+",
+            "answer": 84,
+            "id": "14+70"
+          },
+          "timeMs": 810.8
+        },
+        {
+          "problem": {
+            "a": 116,
+            "b": 54,
+            "op": "-",
+            "answer": 62,
+            "id": "116-54"
+          },
+          "timeMs": 1432
+        },
+        {
+          "problem": {
+            "a": 73,
+            "b": 66,
+            "op": "-",
+            "answer": 7,
+            "id": "73-66"
+          },
+          "timeMs": 1771.6
+        },
+        {
+          "problem": {
+            "a": 115,
+            "b": 98,
+            "op": "-",
+            "answer": 17,
+            "id": "115-98"
+          },
+          "timeMs": 899.8
+        },
+        {
+          "problem": {
+            "a": 44,
+            "b": 31,
+            "op": "-",
+            "answer": 13,
+            "id": "44-31"
+          },
+          "timeMs": 1715
+        },
+        {
+          "problem": {
+            "a": 15,
+            "b": 38,
+            "op": "+",
+            "answer": 53,
+            "id": "15+38"
+          },
+          "timeMs": 2020.2
+        },
+        {
+          "problem": {
+            "a": 96,
+            "b": 49,
+            "op": "+",
+            "answer": 145,
+            "id": "96+49"
+          },
+          "timeMs": 2460.7
+        },
+        {
+          "problem": {
+            "a": 116,
+            "b": 18,
+            "op": "-",
+            "answer": 98,
+            "id": "116-18"
+          },
+          "timeMs": 2115.3
+        },
+        {
+          "problem": {
+            "a": 161,
+            "b": 98,
+            "op": "-",
+            "answer": 63,
+            "id": "161-98"
+          },
+          "timeMs": 1267.6
+        },
+        {
+          "problem": {
+            "a": 5,
+            "b": 36,
+            "op": "×",
+            "answer": 180,
+            "id": "5×36"
+          },
+          "timeMs": 308.3
+        },
+        {
+          "problem": {
+            "a": 4,
+            "b": 98,
+            "op": "×",
+            "answer": 392,
+            "id": "4×98"
+          },
+          "timeMs": 3120.8
+        },
+        {
+          "problem": {
+            "a": 6,
+            "b": 13,
+            "op": "×",
+            "answer": 78,
+            "id": "6×13"
+          },
+          "timeMs": 2186.3
+        },
+        {
+          "problem": {
+            "a": 664,
+            "b": 83,
+            "op": "÷",
+            "answer": 8,
+            "id": "664÷83"
+          },
+          "timeMs": 1021.8
+        },
+        {
+          "problem": {
+            "a": 75,
+            "b": 60,
+            "op": "-",
+            "answer": 15,
+            "id": "75-60"
+          },
+          "timeMs": 919
+        },
+        {
+          "problem": {
+            "a": 90,
+            "b": 15,
+            "op": "÷",
+            "answer": 6,
+            "id": "90÷15"
+          },
+          "timeMs": 781.5
+        },
+        {
+          "problem": {
+            "a": 66,
+            "b": 8,
+            "op": "-",
+            "answer": 58,
+            "id": "66-8"
+          },
+          "timeMs": 3149.1
+        },
+        {
+          "problem": {
+            "a": 60,
+            "b": 30,
+            "op": "÷",
+            "answer": 2,
+            "id": "60÷30"
+          },
+          "timeMs": 1641.2
+        }
+      ]
+    },
+    {
+      "id": "fixture-05",
+      "date": "2026-10-03T12:05:00.000Z",
+      "mode": "count",
+      "duration": 120,
+      "count": 10,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-5",
+      "elapsedMs": 16651.1,
+      "logs": [
+        {
+          "problem": {
+            "a": 88,
+            "b": 86,
+            "op": "+",
+            "answer": 174,
+            "id": "88+86"
+          },
+          "timeMs": 1579.7
+        },
+        {
+          "problem": {
+            "a": 81,
+            "b": 79,
+            "op": "+",
+            "answer": 160,
+            "id": "81+79"
+          },
+          "timeMs": 1502.5
+        },
+        {
+          "problem": {
+            "a": 260,
+            "b": 52,
+            "op": "÷",
+            "answer": 5,
+            "id": "260÷52"
+          },
+          "timeMs": 3142.1
+        },
+        {
+          "problem": {
+            "a": 6,
+            "b": 6,
+            "op": "×",
+            "answer": 36,
+            "id": "6×6"
+          },
+          "timeMs": 1336.9
+        },
+        {
+          "problem": {
+            "a": 651,
+            "b": 93,
+            "op": "÷",
+            "answer": 7,
+            "id": "651÷93"
+          },
+          "timeMs": 773.5
+        },
+        {
+          "problem": {
+            "a": 36,
+            "b": 23,
+            "op": "+",
+            "answer": 59,
+            "id": "36+23"
+          },
+          "timeMs": 2494.3
+        },
+        {
+          "problem": {
+            "a": 891,
+            "b": 99,
+            "op": "÷",
+            "answer": 9,
+            "id": "891÷99"
+          },
+          "timeMs": 528.5
+        },
+        {
+          "problem": {
+            "a": 11,
+            "b": 19,
+            "op": "×",
+            "answer": 209,
+            "id": "11×19"
+          },
+          "timeMs": 2217.8
+        },
+        {
+          "problem": {
+            "a": 7,
+            "b": 64,
+            "op": "+",
+            "answer": 71,
+            "id": "7+64"
+          },
+          "timeMs": 1828.8
+        },
+        {
+          "problem": {
+            "a": 10,
+            "b": 71,
+            "op": "×",
+            "answer": 710,
+            "id": "10×71"
+          },
+          "timeMs": 1247
+        }
+      ]
+    },
+    {
+      "id": "fixture-04",
+      "date": "2026-10-02T12:04:00.000Z",
+      "mode": "count",
+      "duration": 120,
+      "count": 25,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-4",
+      "elapsedMs": 42660.1,
+      "logs": [
+        {
+          "problem": {
+            "a": 12,
+            "b": 96,
+            "op": "+",
+            "answer": 108,
+            "id": "12+96"
+          },
+          "timeMs": 342.9
+        },
+        {
+          "problem": {
+            "a": 8,
+            "b": 80,
+            "op": "×",
+            "answer": 640,
+            "id": "8×80"
+          },
+          "timeMs": 2643.4
+        },
+        {
+          "problem": {
+            "a": 131,
+            "b": 63,
+            "op": "-",
+            "answer": 68,
+            "id": "131-63"
+          },
+          "timeMs": 453.7
+        },
+        {
+          "problem": {
+            "a": 91,
+            "b": 7,
+            "op": "-",
+            "answer": 84,
+            "id": "91-7"
+          },
+          "timeMs": 1228.9
+        },
+        {
+          "problem": {
+            "a": 80,
+            "b": 68,
+            "op": "-",
+            "answer": 12,
+            "id": "80-68"
+          },
+          "timeMs": 1407.9
+        },
+        {
+          "problem": {
+            "a": 4,
+            "b": 84,
+            "op": "×",
+            "answer": 336,
+            "id": "4×84"
+          },
+          "timeMs": 3142.8
+        },
+        {
+          "problem": {
+            "a": 96,
+            "b": 28,
+            "op": "-",
+            "answer": 68,
+            "id": "96-28"
+          },
+          "timeMs": 408.8
+        },
+        {
+          "problem": {
+            "a": 69,
+            "b": 48,
+            "op": "-",
+            "answer": 21,
+            "id": "69-48"
+          },
+          "timeMs": 1718.2
+        },
+        {
+          "problem": {
+            "a": 109,
+            "b": 17,
+            "op": "-",
+            "answer": 92,
+            "id": "109-17"
+          },
+          "timeMs": 2837
+        },
+        {
+          "problem": {
+            "a": 67,
+            "b": 49,
+            "op": "-",
+            "answer": 18,
+            "id": "67-49"
+          },
+          "timeMs": 2308
+        },
+        {
+          "problem": {
+            "a": 31,
+            "b": 29,
+            "op": "+",
+            "answer": 60,
+            "id": "31+29"
+          },
+          "timeMs": 526.3
+        },
+        {
+          "problem": {
+            "a": 86,
+            "b": 22,
+            "op": "-",
+            "answer": 64,
+            "id": "86-22"
+          },
+          "timeMs": 2380.4
+        },
+        {
+          "problem": {
+            "a": 150,
+            "b": 15,
+            "op": "÷",
+            "answer": 10,
+            "id": "150÷15"
+          },
+          "timeMs": 2618.4
+        },
+        {
+          "problem": {
+            "a": 6,
+            "b": 49,
+            "op": "×",
+            "answer": 294,
+            "id": "6×49"
+          },
+          "timeMs": 1574.9
+        },
+        {
+          "problem": {
+            "a": 38,
+            "b": 83,
+            "op": "+",
+            "answer": 121,
+            "id": "38+83"
+          },
+          "timeMs": 773
+        },
+        {
+          "problem": {
+            "a": 3,
+            "b": 82,
+            "op": "×",
+            "answer": 246,
+            "id": "3×82"
+          },
+          "timeMs": 2748.8
+        },
+        {
+          "problem": {
+            "a": 156,
+            "b": 78,
+            "op": "÷",
+            "answer": 2,
+            "id": "156÷78"
+          },
+          "timeMs": 2320.8
+        },
+        {
+          "problem": {
+            "a": 67,
+            "b": 66,
+            "op": "+",
+            "answer": 133,
+            "id": "67+66"
+          },
+          "timeMs": 3118.5
+        },
+        {
+          "problem": {
+            "a": 512,
+            "b": 64,
+            "op": "÷",
+            "answer": 8,
+            "id": "512÷64"
+          },
+          "timeMs": 294.4
+        },
+        {
+          "problem": {
+            "a": 49,
+            "b": 39,
+            "op": "+",
+            "answer": 88,
+            "id": "49+39"
+          },
+          "timeMs": 2648.9
+        },
+        {
+          "problem": {
+            "a": 119,
+            "b": 72,
+            "op": "-",
+            "answer": 47,
+            "id": "119-72"
+          },
+          "timeMs": 1882.5
+        },
+        {
+          "problem": {
+            "a": 111,
+            "b": 19,
+            "op": "-",
+            "answer": 92,
+            "id": "111-19"
+          },
+          "timeMs": 2028.7
+        },
+        {
+          "problem": {
+            "a": 95,
+            "b": 20,
+            "op": "+",
+            "answer": 115,
+            "id": "95+20"
+          },
+          "timeMs": 404.3
+        },
+        {
+          "problem": {
+            "a": 96,
+            "b": 35,
+            "op": "-",
+            "answer": 61,
+            "id": "96-35"
+          },
+          "timeMs": 1067.2
+        },
+        {
+          "problem": {
+            "a": 192,
+            "b": 24,
+            "op": "÷",
+            "answer": 8,
+            "id": "192÷24"
+          },
+          "timeMs": 1781.4
+        }
+      ]
+    },
+    {
+      "id": "fixture-03",
+      "date": "2026-09-30T12:03:00.000Z",
+      "mode": "count",
+      "duration": 120,
+      "count": 10,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-3",
+      "elapsedMs": 13261.3,
+      "logs": [
+        {
+          "problem": {
+            "a": 39,
+            "b": 97,
+            "op": "+",
+            "answer": 136,
+            "id": "39+97"
+          },
+          "timeMs": 2173
+        },
+        {
+          "problem": {
+            "a": 46,
+            "b": 4,
+            "op": "+",
+            "answer": 50,
+            "id": "46+4"
+          },
+          "timeMs": 484.1
+        },
+        {
+          "problem": {
+            "a": 4,
+            "b": 99,
+            "op": "×",
+            "answer": 396,
+            "id": "4×99"
+          },
+          "timeMs": 606.3
+        },
+        {
+          "problem": {
+            "a": 132,
+            "b": 61,
+            "op": "-",
+            "answer": 71,
+            "id": "132-61"
+          },
+          "timeMs": 2570.2
+        },
+        {
+          "problem": {
+            "a": 7,
+            "b": 71,
+            "op": "+",
+            "answer": 78,
+            "id": "7+71"
+          },
+          "timeMs": 307.4
+        },
+        {
+          "problem": {
+            "a": 6,
+            "b": 70,
+            "op": "×",
+            "answer": 420,
+            "id": "6×70"
+          },
+          "timeMs": 1318
+        },
+        {
+          "problem": {
+            "a": 7,
+            "b": 27,
+            "op": "+",
+            "answer": 34,
+            "id": "7+27"
+          },
+          "timeMs": 914.8
+        },
+        {
+          "problem": {
+            "a": 86,
+            "b": 6,
+            "op": "+",
+            "answer": 92,
+            "id": "86+6"
+          },
+          "timeMs": 2931.1
+        },
+        {
+          "problem": {
+            "a": 109,
+            "b": 71,
+            "op": "-",
+            "answer": 38,
+            "id": "109-71"
+          },
+          "timeMs": 788.1
+        },
+        {
+          "problem": {
+            "a": 25,
+            "b": 4,
+            "op": "+",
+            "answer": 29,
+            "id": "25+4"
+          },
+          "timeMs": 1168.3
+        }
+      ]
+    },
+    {
+      "id": "fixture-02",
+      "date": "2026-09-29T12:02:00.000Z",
+      "mode": "time",
+      "duration": 15,
+      "count": 25,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-2",
+      "elapsedMs": 15000,
+      "logs": [
+        {
+          "problem": {
+            "a": 210,
+            "b": 70,
+            "op": "÷",
+            "answer": 3,
+            "id": "210÷70"
+          },
+          "timeMs": 2243.2
+        },
+        {
+          "problem": {
+            "a": 26,
+            "b": 48,
+            "op": "+",
+            "answer": 74,
+            "id": "26+48"
+          },
+          "timeMs": 510.1
+        },
+        {
+          "problem": {
+            "a": 63,
+            "b": 66,
+            "op": "+",
+            "answer": 129,
+            "id": "63+66"
+          },
+          "timeMs": 1183.6
+        },
+        {
+          "problem": {
+            "a": 43,
+            "b": 19,
+            "op": "+",
+            "answer": 62,
+            "id": "43+19"
+          },
+          "timeMs": 2059.6
+        },
+        {
+          "problem": {
+            "a": 15,
+            "b": 4,
+            "op": "-",
+            "answer": 11,
+            "id": "15-4"
+          },
+          "timeMs": 3270.2
+        },
+        {
+          "problem": {
+            "a": 468,
+            "b": 52,
+            "op": "÷",
+            "answer": 9,
+            "id": "468÷52"
+          },
+          "timeMs": 695.5
+        },
+        {
+          "problem": {
+            "a": 78,
+            "b": 79,
+            "op": "+",
+            "answer": 157,
+            "id": "78+79"
+          },
+          "timeMs": 1100.8
+        },
+        {
+          "problem": {
+            "a": 133,
+            "b": 19,
+            "op": "÷",
+            "answer": 7,
+            "id": "133÷19"
+          },
+          "timeMs": 478.7
+        },
+        {
+          "problem": {
+            "a": 9,
+            "b": 8,
+            "op": "×",
+            "answer": 72,
+            "id": "9×8"
+          },
+          "timeMs": 1560.6
+        },
+        {
+          "problem": {
+            "a": 5,
+            "b": 25,
+            "op": "×",
+            "answer": 125,
+            "id": "5×25"
+          },
+          "timeMs": 1546.5
+        }
+      ]
+    },
+    {
+      "id": "fixture-01",
+      "date": "2026-09-28T12:01:00.000Z",
+      "mode": "time",
+      "duration": 30,
+      "count": 25,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-1",
+      "elapsedMs": 30000,
+      "logs": [
+        {
+          "problem": {
+            "a": 399,
+            "b": 57,
+            "op": "÷",
+            "answer": 7,
+            "id": "399÷57"
+          },
+          "timeMs": 2489.6
+        },
+        {
+          "problem": {
+            "a": 72,
+            "b": 12,
+            "op": "÷",
+            "answer": 6,
+            "id": "72÷12"
+          },
+          "timeMs": 2472.6
+        },
+        {
+          "problem": {
+            "a": 121,
+            "b": 21,
+            "op": "-",
+            "answer": 100,
+            "id": "121-21"
+          },
+          "timeMs": 2849.9
+        },
+        {
+          "problem": {
+            "a": 107,
+            "b": 92,
+            "op": "-",
+            "answer": 15,
+            "id": "107-92"
+          },
+          "timeMs": 1674.2
+        },
+        {
+          "problem": {
+            "a": 504,
+            "b": 84,
+            "op": "÷",
+            "answer": 6,
+            "id": "504÷84"
+          },
+          "timeMs": 1845.7
+        },
+        {
+          "problem": {
+            "a": 11,
+            "b": 3,
+            "op": "×",
+            "answer": 33,
+            "id": "11×3"
+          },
+          "timeMs": 1956.7
+        },
+        {
+          "problem": {
+            "a": 198,
+            "b": 22,
+            "op": "÷",
+            "answer": 9,
+            "id": "198÷22"
+          },
+          "timeMs": 600.5
+        },
+        {
+          "problem": {
+            "a": 5,
+            "b": 86,
+            "op": "×",
+            "answer": 430,
+            "id": "5×86"
+          },
+          "timeMs": 2841.9
+        },
+        {
+          "problem": {
+            "a": 4,
+            "b": 8,
+            "op": "×",
+            "answer": 32,
+            "id": "4×8"
+          },
+          "timeMs": 2579
+        },
+        {
+          "problem": {
+            "a": 46,
+            "b": 8,
+            "op": "+",
+            "answer": 54,
+            "id": "46+8"
+          },
+          "timeMs": 1889.3
+        },
+        {
+          "problem": {
+            "a": 256,
+            "b": 64,
+            "op": "÷",
+            "answer": 4,
+            "id": "256÷64"
+          },
+          "timeMs": 1688.3
+        },
+        {
+          "problem": {
+            "a": 5,
+            "b": 2,
+            "op": "-",
+            "answer": 3,
+            "id": "5-2"
+          },
+          "timeMs": 376.2
+        },
+        {
+          "problem": {
+            "a": 89,
+            "b": 63,
+            "op": "+",
+            "answer": 152,
+            "id": "89+63"
+          },
+          "timeMs": 2120
+        },
+        {
+          "problem": {
+            "a": 12,
+            "b": 6,
+            "op": "×",
+            "answer": 72,
+            "id": "12×6"
+          },
+          "timeMs": 595.1
+        },
+        {
+          "problem": {
+            "a": 5,
+            "b": 50,
+            "op": "×",
+            "answer": 250,
+            "id": "5×50"
+          },
+          "timeMs": 3406.9
+        }
+      ]
+    },
+    {
+      "id": "fixture-00",
+      "date": "2026-09-28T12:00:00.000Z",
+      "mode": "time",
+      "duration": 15,
+      "count": 25,
+      "customKind": "time",
+      "ranges": {
+        "+": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "-": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 100,
+          "minB": 2,
+          "maxB": 100
+        },
+        "×": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        },
+        "÷": {
+          "enabled": true,
+          "weight": 1,
+          "minA": 2,
+          "maxA": 12,
+          "minB": 2,
+          "maxB": 100
+        }
+      },
+      "seed": "seed-0",
+      "elapsedMs": 15000,
+      "logs": [
+        {
+          "problem": {
+            "a": 15,
+            "b": 80,
+            "op": "+",
+            "answer": 95,
+            "id": "15+80"
+          },
+          "timeMs": 1631.8
+        },
+        {
+          "problem": {
+            "a": 3,
+            "b": 30,
+            "op": "×",
+            "answer": 90,
+            "id": "3×30"
+          },
+          "timeMs": 1317.4
+        },
+        {
+          "problem": {
+            "a": 7,
+            "b": 2,
+            "op": "×",
+            "answer": 14,
+            "id": "7×2"
+          },
+          "timeMs": 2456.9
+        },
+        {
+          "problem": {
+            "a": 129,
+            "b": 77,
+            "op": "-",
+            "answer": 52,
+            "id": "129-77"
+          },
+          "timeMs": 3239.2
+        },
+        {
+          "problem": {
+            "a": 10,
+            "b": 23,
+            "op": "×",
+            "answer": 230,
+            "id": "10×23"
+          },
+          "timeMs": 2315.5
+        },
+        {
+          "problem": {
+            "a": 93,
+            "b": 81,
+            "op": "-",
+            "answer": 12,
+            "id": "93-81"
+          },
+          "timeMs": 2346
+        }
+      ]
+    }
+  ]
+}
