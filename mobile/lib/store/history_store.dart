@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
@@ -34,6 +35,13 @@ class FileHistoryBackend implements HistoryBackend {
     await temp.writeAsString(json, flush: true);
     await temp.rename(file.path);
   }
+}
+
+const maxHistoryImportBytes = 25 * 1024 * 1024;
+
+class HistoryImportSizeError implements Exception {
+  @override
+  String toString() => 'History files must be 25 MiB or smaller.';
 }
 
 class HistoryState {
@@ -113,6 +121,9 @@ class HistoryNotifier extends Notifier<HistoryState> {
   /// Merges an export into history and returns how many results it held.
   /// Throws [HistoryFormatError] for a file that is not a valid export.
   Future<int> importJson(String json) async {
+    if (json.length > maxHistoryImportBytes || utf8.encode(json).length > maxHistoryImportBytes) {
+      throw HistoryImportSizeError();
+    }
     final imported = parseHistory(json);
     return _enqueue(() async {
       final results = mergeHistory(state.results, imported);

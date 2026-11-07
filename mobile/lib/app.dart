@@ -51,8 +51,8 @@ class _HomeShellState extends ConsumerState<HomeShell> {
       builder: (context, _) {
         final focus = practice.running && ref.watch(settingsProvider.select((s) => s.focusMode));
         // Android back ends a running test (saved, as browser back does on web), then returns to
-        // practice from another tab, and only then leaves the app. In focus mode it is the only way
-        // out of a zen run besides restart, which discards it.
+        // practice from another tab, and only then leaves the app. The visible finish action
+        // also saves practice; restart confirms before discarding it.
         return PopScope(
           canPop: !practice.running && tab == AppTab.practice,
           onPopInvokedWithResult: (didPop, _) {

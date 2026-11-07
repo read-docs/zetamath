@@ -63,6 +63,12 @@ void main() {
     expect(container.read(historyProvider).results, hasLength(1));
   });
 
+  test('oversized imports are rejected without touching history', () async {
+    await history().add(_count('a', 2000));
+    await expectLater(history().importJson(' ' * (maxHistoryImportBytes + 1)), throwsA(isA<HistoryImportSizeError>()));
+    expect(container.read(historyProvider).results.single.id, 'a');
+  });
+
   test('an unreadable history file is never overwritten', () async {
     final file = File('${dir.path}/zetamath-results-v1.json')
       ..writeAsStringSync('{"version":1,"results":[{"broken":true}]}');

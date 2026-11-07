@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 
 import '../engine/generator.dart';
 import 'history.dart';
+import 'settings.dart';
 
 String dayKey(DateTime d) => '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
 DateTime _addDays(DateTime d, int n) => DateTime(d.year, d.month, d.day + n);
@@ -77,15 +78,24 @@ class Summary {
   };
 }
 
-/// Totals over [results] (newest first). Drills count towards totals but not pace.
-Summary summary(List<Result> results) {
+/// Comparable mode, goal and ranges for the selected settings.
+bool matchesSettings(Result r, Settings? settings) =>
+    settings == null ||
+    (r.mode == settings.mode &&
+        (r.mode != TestMode.custom || r.customKind == settings.customKind) &&
+        (r.isCountRun ? r.count == settings.count : r.duration == settings.duration) &&
+        rangesKey(r.ranges) == rangesKey(settings.ranges));
+
+/// All practice contributes solved/time totals; only completed scored tests contribute pace.
+Summary summary(List<Result> results, {Settings? settings}) {
   final scored = [
     for (final r in results)
-      if (!r.isDrill && r.logs.isNotEmpty) r,
+      if (r.isScoredRun && matchesSettings(r, settings)) r,
   ];
+  scored.sort((a, b) => DateTime.parse(b.date).compareTo(DateTime.parse(a.date)));
   final paces = [for (final r in scored) r.pace];
   return Summary(
-    tests: results.length,
+    tests: results.where((r) => r.isScoredRun).length,
     solved: results.fold(0, (n, r) => n + r.logs.length),
     timeMs: results.fold(0.0, (n, r) => n + r.elapsedMs),
     joined: results.isEmpty ? null : results.map((r) => r.date).reduce((a, d) => d.compareTo(a) < 0 ? d : a),
@@ -127,10 +137,10 @@ class HistoryPoint {
 }
 
 /// Oldest-first pace per test with trailing averages over the last 10 and 100 tests.
-List<HistoryPoint> profilePaceSeries(Iterable<Result> results) {
+List<HistoryPoint> profilePaceSeries(Iterable<Result> results, {Settings? settings}) {
   final ordered = [
     for (final r in results)
-      if (!r.isDrill && r.logs.isNotEmpty) r,
+      if (r.isScoredRun && matchesSettings(r, settings)) r,
   ];
   mergeSort(ordered, compare: (a, b) => DateTime.parse(a.date).compareTo(DateTime.parse(b.date)));
   final paces = [for (final r in ordered) r.pace];

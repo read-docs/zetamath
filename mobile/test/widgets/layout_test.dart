@@ -34,7 +34,11 @@ void main() {
       // A long problem must shrink onto one line, not wrap or overflow.
       container.read(settingsProvider.notifier).update((s) => s.copyWith(ranges: hugeRanges(s)));
       await tester.pumpAndSettle();
+      container.read(practiceProvider).begin();
+      await tester.pump();
       expect(tester.takeException(), isNull);
+      container.read(practiceProvider).finish();
+      await tester.pumpAndSettle();
 
       for (final tab in ['profile', 'settings', 'learn']) {
         await tester.tap(find.text(tab));

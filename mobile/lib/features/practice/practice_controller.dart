@@ -49,12 +49,13 @@ class PracticeController extends ChangeNotifier {
   /// Settings for the current test, fixed when it starts so mid-test edits don't change it.
   late Settings config = readSettings();
   Problem? problem;
+  Problem? _prepared;
   String input = '';
   Result? result;
   bool personalBest = false;
   String? error;
 
-  /// Milliseconds since the first digit. Separate from [notifyListeners] so the timer can
+  /// Milliseconds since the first problem was revealed. Separate from [notifyListeners] so the timer can
   /// repaint every frame without rebuilding the screen.
   final elapsed = ValueNotifier<double>(0);
 
@@ -67,6 +68,7 @@ class PracticeController extends ChangeNotifier {
   late double Function() _rng;
 
   bool get running => _start != null;
+  bool get ready => _prepared != null && !running && result == null;
   int get score => _logs.length;
 
   void restart({List<Problem>? drill}) {
@@ -83,11 +85,24 @@ class PracticeController extends ChangeNotifier {
     _seed = config.seed.isNotEmpty ? config.seed : const Uuid().v4();
     _rng = createRng(_seed);
     problem = null;
+    _prepared = null;
     try {
       _next();
+      _prepared = problem;
+      problem = null;
     } on RangeConfigError catch (e) {
       error = e.message;
     }
+    notifyListeners();
+  }
+
+  /// Reveals the first problem at the same instant its solve time begins.
+  void begin() {
+    if (!ready) return;
+    problem = _prepared;
+    _prepared = null;
+    _start = clock();
+    _last = _start!;
     notifyListeners();
   }
 
@@ -108,7 +123,7 @@ class PracticeController extends ChangeNotifier {
   }
 
   void press(KeypadKey key, {required double at}) {
-    if (problem == null || result != null) return;
+    if (!running || problem == null || result != null) return;
     switch (key) {
       case DigitKey(:final value):
         if (input.length < _maxDigits) input += '$value';
@@ -116,11 +131,6 @@ class PracticeController extends ChangeNotifier {
         if (input.isNotEmpty) input = input.substring(0, input.length - 1);
       case ClearKey():
         input = '';
-    }
-    if (_start == null && key is DigitKey) {
-      config = readSettings();
-      _start = at;
-      _last = at;
     }
     final start = _start;
     if (start == null) return notifyListeners();
@@ -157,11 +167,13 @@ class PracticeController extends ChangeNotifier {
     return true;
   }
 
-  /// Ends the test and saves it. Does nothing before the first digit.
+  /// Ends the test and saves it. Does nothing before begin.
   void finish({double? at}) {
     final start = _start;
     if (start == null) return;
-    final ms = (at ?? clock()) - start;
+    final ms = ((at ?? clock()) - start)
+        .clamp(0.0, config.timed ? config.duration * 1000.0 : double.infinity)
+        .toDouble();
     _start = null;
     elapsed.value = ms;
     final r = Result(

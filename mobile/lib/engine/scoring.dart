@@ -64,21 +64,37 @@ class PacePoint {
   Map<String, Object> toJson() => {'second': second, 'ppm': ppm, 'slow': slow};
 }
 
-/// Problems per minute over a trailing window, one point per second. `slow` marks seconds
-/// in which a solve took over 1.5× the median.
+/// Problems per minute over a trailing window, capped at 600 evenly spaced points.
+/// Short sessions retain one point per second. `slow` marks buckets containing a
+/// solve that took over 1.5× the median.
 List<PacePoint> paceSeries(List<Solve> solves, double elapsedMs, {int windowSeconds = 10}) {
   var time = 0.0;
   final events = [for (final s in solves) (end: time += s.timeMs, timeMs: s.timeMs)];
   final slowThreshold = median([for (final s in solves) s.timeMs]) * 1.5;
-  return List.generate((elapsedMs / 1000).ceil(), (i) {
-    final end = math.min((i + 1) * 1000.0, elapsedMs);
+  if (!elapsedMs.isFinite || elapsedMs <= 0) return [];
+  final seconds = (elapsedMs / 1000).ceil();
+  final count = math.min(seconds, 600);
+  final step = math.max(1.0, seconds / count);
+  var left = 0, right = 0, bucketStart = 0, previousEnd = 0.0;
+  return List.generate(count, (i) {
+    final end = math.min((i + 1) * step * 1000, elapsedMs);
     final start = math.max(0.0, end - windowSeconds * 1000);
-    final recent = events.where((e) => e.end > start && e.end <= end).length;
-    return PacePoint(
-      second: end / 1000,
-      ppm: ppm(recent, end - start),
-      slow: events.any((e) => e.end > i * 1000 && e.end <= end && e.timeMs > slowThreshold),
-    );
+    while (right < events.length && events[right].end <= end) {
+      right++;
+    }
+    while (left < right && events[left].end <= start) {
+      left++;
+    }
+    while (bucketStart < right && events[bucketStart].end <= previousEnd) {
+      bucketStart++;
+    }
+    var slow = false;
+    for (var j = bucketStart; j < right; j++) {
+      if (events[j].timeMs > slowThreshold) slow = true;
+    }
+    bucketStart = right;
+    previousEnd = end;
+    return PacePoint(second: end / 1000, ppm: ppm(right - left, end - start), slow: slow);
   });
 }
 

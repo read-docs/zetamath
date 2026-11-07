@@ -21,7 +21,14 @@ export const isCountRun = (r: Pick<Result, 'mode' | 'customKind'>) => r.mode ===
 export function rangesKey(ranges: RangeConfig): string {
   return JSON.stringify(operations.map(op => [op, ranges[op].enabled, ranges[op].weight, ranges[op].minA, ranges[op].maxA, ranges[op].minB, ranges[op].maxB]));
 }
-export function resultKey(r: Result): string {
+export type TestConfig = Pick<Result, 'mode' | 'customKind' | 'duration' | 'count' | 'ranges'>;
+export function isCompletedRun(r: Result): boolean {
+  return r.mode !== 'zen' && (isCountRun(r) ? r.logs.length >= r.count : r.elapsedMs >= r.duration * 1000);
+}
+export function scoredResult(r: Result): boolean {
+  return isCompletedRun(r) && !r.drill && r.logs.length > 0 && r.elapsedMs > 0;
+}
+export function resultKey(r: TestConfig): string {
   return JSON.stringify([r.mode, r.mode === 'custom' ? r.customKind : '', isCountRun(r) ? r.count : r.duration, rangesKey(r.ranges)]);
 }
 export const pace = (r: Result) => r.elapsedMs > 0 ? r.logs.length * 60000 / r.elapsedMs : 0;
@@ -31,8 +38,7 @@ function better(a: Result, b: Result): boolean {
 export function personalBests(results: Result[]): Result[] {
   const best = new Map<string, Result>();
   for (const r of results) {
-    if (r.drill || r.mode === 'zen' || !r.logs.length) continue;
-    if (isCountRun(r) ? r.logs.length < r.count : r.elapsedMs < r.duration * 1000) continue;
+    if (!scoredResult(r)) continue;
     const key = resultKey(r), previous = best.get(key);
     if (!previous || better(r, previous)) best.set(key, r);
   }
@@ -111,6 +117,7 @@ export function createHistoryStore(storage: HistoryBackend) {
     return isPB;
   }),
   importJSON: json => enqueue(async () => {
+    if (json.length > 25 * 1024 * 1024 || new TextEncoder().encode(json).length > 25 * 1024 * 1024) throw new Error('History file is too large. Choose an export smaller than 25 MiB.');
     const imported = parseHistory(json);
     await state().load();
     if (!state().loaded) throw new Error(state().error || 'History is unavailable.');

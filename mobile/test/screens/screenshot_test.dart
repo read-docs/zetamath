@@ -75,6 +75,7 @@ void main() {
     await shot(tester, '1-idle');
 
     final p = container.read(practiceProvider);
+    p.begin();
     p.press(const KeypadKey.digit(1), at: clock.now);
     p.press(KeypadKey.clear, at: clock.now);
     for (var i = 0; i < 7; i++) {

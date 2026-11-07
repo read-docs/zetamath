@@ -34,6 +34,13 @@ void main() {
     expect([for (final s in slowest(solves, limit: 3)) solves.indexOf(s)], ties['slowest']);
   });
 
+  test('bounds chart allocation for very long imported sessions', () {
+    final points = paceSeries([Solve(problem: Problem.make(Operation.add, 2, 3), timeMs: 2000)], 1e15);
+    expect(points, hasLength(600));
+    expect(points.last.second, 1e12);
+    expect(paceSeries([], double.infinity), isEmpty);
+  });
+
   test('takes the median of any list', () {
     for (final c in scoring['medians'] as List) {
       expect(median([for (final v in c['values'] as List) (v as num).toDouble()]), c['median']);

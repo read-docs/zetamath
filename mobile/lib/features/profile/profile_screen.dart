@@ -22,7 +22,7 @@ String dateLabel(String iso, {bool time = false}) {
 String modeLabel(Result r) {
   if (r.mode == TestMode.zen) return 'zen${r.isDrill ? ' · drill' : ''}';
   final length = r.isCountRun ? '${r.count} problems' : '${r.duration}s';
-  return '${r.mode == TestMode.custom ? 'custom ' : ''}$length${r.isDrill ? ' · drill' : ''}';
+  return '${r.mode == TestMode.custom ? 'custom ' : ''}$length · ${r.statusLabel}';
 }
 
 /// Level, streaks, personal bests, activity, pace history and past tests.
@@ -41,10 +41,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final results = ref.watch(historyProvider.select((h) => h.results));
     final s = ref.watch(settingsProvider);
     final z = context.zeta;
-    final stats = summary(results);
+    final stats = summary(results, settings: s);
     final streak = streaks(results);
     final xp = level(results);
-    final series = profilePaceSeries(results);
+    final series = profilePaceSeries(results, settings: s);
     final difficulty = currentDifficulty(s.ranges);
     final name = s.name.trim().isEmpty ? 'guest' : s.name.trim();
 
@@ -133,6 +133,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
         ),
         _Heatmap(results: results),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Text(
+            'Pace and history compare completed tests with your current mode, goal and ranges. Ppm means problems per minute.',
+            style: TextStyle(color: z.sub, fontSize: 12),
+          ),
+        ),
         if (series.length > 1) ...[const SizedBox(height: 12), _HistoryChart(series: series)],
         const SizedBox(height: 12),
         Panel(
@@ -297,11 +304,8 @@ class _Heatmap extends StatelessWidget {
             runAlignment: WrapAlignment.start,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              Text('test activity', style: TextStyle(color: z.sub)),
-              Text(
-                '$total ${total == 1 ? 'test' : 'tests'} in the last year',
-                style: TextStyle(color: z.sub, fontSize: 12),
-              ),
+              Text('practice activity', style: TextStyle(color: z.sub)),
+              Text('$total sessions in the last year', style: TextStyle(color: z.sub, fontSize: 12)),
             ],
           ),
           const SizedBox(height: 8),
@@ -328,12 +332,15 @@ class _Heatmap extends StatelessWidget {
                             ),
                           ),
                         ),
-                        for (final (_, n) in w)
-                          Container(
-                            width: cell,
-                            height: cell,
-                            margin: const EdgeInsets.only(bottom: gap),
-                            decoration: BoxDecoration(color: shade(n), borderRadius: BorderRadius.circular(2)),
+                        for (final (date, n) in w)
+                          Semantics(
+                            label: '${dateLabel(date.toIso8601String())}: $n practice sessions',
+                            child: Container(
+                              width: cell,
+                              height: cell,
+                              margin: const EdgeInsets.only(bottom: gap),
+                              decoration: BoxDecoration(color: shade(n), borderRadius: BorderRadius.circular(2)),
+                            ),
                           ),
                       ],
                     ),

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=JetBrains+Mono:wght@400;500;600&family=Lexend+Deca:wght@400;500&family=Roboto+Mono:wght@400;500&family=Space+Mono:wght@400;700&display=swap');
+@import './fonts.css';
 @import 'tailwindcss';
 
 :root { --gutter:clamp(16px,4vw,72px); --sub-alt:color-mix(in srgb,var(--text) 6%,var(--bg)); --bg:#161821; --main:#84a0c6; --sub:#6b7089; --text:#c6c8d1; --error:#e27878; font-family:var(--font,'JetBrains Mono'),monospace; color:var(--text); background:var(--bg); font-synthesis:none; text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased; }
@@ -66,7 +66,7 @@ th:first-child,td:first-child { padding-left:0; }
 .palette input { width:100%; margin-bottom:16px; }
 .palette button { display:block; width:100%; text-align:left; margin:4px 0; }
 .palette h2 { color:var(--sub); font-size:.8rem; margin:16px 0 8px; }
-.focus-mode header,.focus-mode .mode-bar,.focus-mode .hint { visibility:hidden; }
+
 .recharts-text { fill:var(--sub); font-family:inherit; font-size:11px; }
 .recharts-default-tooltip { background:var(--bg)!important; border-color:var(--sub)!important; border-radius:6px; }
 footer { text-align:center; color:var(--sub); font-size:.7rem; padding:20px; }
@@ -87,7 +87,7 @@ footer { text-align:center; color:var(--sub); font-size:.7rem; padding:20px; }
 .inline-answer .answer-input:focus { outline:none; }
 .stacked-answer { flex-direction:column; align-items:center; gap:24px; }
 .live-stats { color:var(--sub); font-size:1rem; }
-.practicing .top-nav,.practicing .account,.practicing .mode-bar,.practicing .hint,.practicing footer { visibility:hidden; pointer-events:none; }
+.focus-mode .top-nav,.focus-mode .account,.focus-mode .mode-bar,.focus-mode .hint,.focus-mode footer { visibility:hidden; pointer-events:none; }
 .practicing .test-stage { min-height:61vh; }
 @media(max-width:640px) { .session-timer { right:16px; top:28px; } .inline-answer { gap:.2em; } }
 .command-terminal { width:min(640px,calc(100vw - 32px)); background:var(--bg); border:1px solid color-mix(in srgb,var(--sub) 25%,transparent); border-radius:10px; box-shadow:0 24px 90px #0006; overflow:hidden; }
@@ -265,3 +265,8 @@ header.top-bar { width:calc(100% - 2 * var(--gutter)); margin:0 auto; display:fl
 .learn-credit { font-size:.72rem; }
 .learn-page a:focus-visible,.learn-page summary:focus-visible { outline:2px solid var(--main); outline-offset:4px; }
 @media(max-width:1000px) { .learn-grid { grid-template-columns:1fr; } .learn-next { flex-direction:column; align-items:flex-start; } }
+
+.session-actions { display:flex; justify-content:center; gap:12px; margin-top:12px; }
+.practice-ready { max-width:38rem; margin:auto; text-align:center; font-size:1rem; }
+.practice-ready button { background:var(--main); color:var(--bg); margin:1rem 0; }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }

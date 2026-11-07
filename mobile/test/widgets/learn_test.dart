@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zetamath/features/learn/lessons.dart';
+import 'package:zetamath/engine/generator.dart';
+import 'package:zetamath/store/history.dart';
+import 'package:zetamath/store/settings.dart';
 import 'package:zetamath/features/practice/practice_providers.dart';
 
 import 'harness.dart';
@@ -34,10 +37,13 @@ void main() {
     final scrollable = find
         .descendant(of: find.byKey(const PageStorageKey('learn')), matching: find.byType(Scrollable))
         .first;
-    await tester.scrollUntilVisible(find.text('Start practicing'), 400, scrollable: scrollable);
-    await tester.tap(find.text('Start practicing'));
+    await tester.scrollUntilVisible(find.text('Practice division'), 400, scrollable: scrollable);
+    await tester.tap(find.text('Practice division'));
     await tester.pumpAndSettle();
     expect(container.read(tabProvider), AppTab.practice);
     expect(container.read(practiceProvider).running, isFalse);
+    final settings = container.read(settingsProvider);
+    expect(settings.mode, TestMode.zen);
+    expect(Operation.values.where((op) => settings.ranges[op].enabled), [Operation.divide]);
   });
 }

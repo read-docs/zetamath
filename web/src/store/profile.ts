@@ -1,5 +1,5 @@
 import type {RangeConfig} from '../engine/generator';
-import {isCountRun,pace,personalBests,rangesKey,type Result} from './history';
+import {isCountRun,pace,personalBests,rangesKey,resultKey,scoredResult,type TestConfig,type Result} from './history';
 
 export const dayKey = (d: Date) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const addDays = (d: Date, n: number) => new Date(d.getFullYear(), d.getMonth(), d.getDate()+n);
@@ -31,14 +31,17 @@ export function streaks(results: Result[], today = new Date()): {current: number
   return {current, longest};
 }
 
-export function summary(results: Result[]) {
-  const scored = results.filter(r=>!r.drill && r.logs.length), paces = scored.map(pace);
+export function summary(results: Result[], config?: TestConfig) {
+  const completed = results.filter(scoredResult);
+  const scored = completed.filter(r => !config || resultKey(r) === resultKey(config))
+    .sort((a,b) => Date.parse(b.date) - Date.parse(a.date));
+  const paces = scored.map(pace);
   return {
-    tests: results.length,
+    tests: completed.length,
     solved: results.reduce((n,r)=>n+r.logs.length, 0),
     timeMs: results.reduce((n,r)=>n+r.elapsedMs, 0),
     joined: results.length ? results.reduce((a,r)=>r.date<a ? r.date : a, results[0].date) : null,
-    highestPace: paces.length ? Math.max(...paces) : 0,
+    highestPace: paces.length ? paces.reduce((best, p) => Math.max(best, p), 0) : 0,
     averagePace: mean(paces),
     last10Pace: mean(paces.slice(0,10)),
     averageVariation: mean(scored.map(variation)),
@@ -57,8 +60,9 @@ export function bestsFor(results: Result[], mode: 'time' | 'count', targets: num
 }
 
 /** Oldest-first pace series with trailing averages over the last 10 and 100 tests. */
-export function paceSeries(results: Result[]) {
-  const ordered = results.filter(r=>!r.drill && r.logs.length).sort((a,b)=>Date.parse(a.date)-Date.parse(b.date));
+export function paceSeries(results: Result[], config?: TestConfig) {
+  const ordered = results.filter(r => scoredResult(r) && (!config || resultKey(r) === resultKey(config)))
+    .sort((a,b)=>Date.parse(a.date)-Date.parse(b.date));
   const paces = ordered.map(pace), trailing = (i: number, n: number) => Math.round(mean(paces.slice(Math.max(0,i-n+1), i+1)));
   return ordered.map((r,i)=>({test: i+1, ppm: Math.round(paces[i]), average10: trailing(i,10), average100: trailing(i,100), date: r.date}));
 }

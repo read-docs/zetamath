@@ -22,10 +22,8 @@ String testSummary(Settings s) => switch (s.mode) {
   _ => '${s.mode.name} · ${s.timed ? '${s.duration}s' : '${s.count}'}',
 };
 
-/// One row: a pill that names the current test and opens the test sheet (finish during a zen run),
-/// and restart.
-/// The pill is locked while a test runs, as the web mode bar is, and fades in focus mode.
-/// Restart always stays.
+/// Test settings before a run; a visible finish action while running.
+/// Restart stays available and confirms before discarding active practice.
 class ModeBar extends ConsumerWidget {
   const ModeBar({super.key, required this.running, required this.focus});
   final bool running, focus;
@@ -36,7 +34,6 @@ class ModeBar extends ConsumerWidget {
     final z = context.zeta;
     final difficulty = difficultyOf(s.ranges)?.name ?? 'custom ranges';
     final practice = ref.read(practiceProvider);
-    final zen = running && practice.config.mode == TestMode.zen;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 8, 8, 0),
@@ -47,9 +44,8 @@ class ModeBar extends ConsumerWidget {
             Expanded(
               child: Align(
                 alignment: Alignment.centerLeft,
-                // Zen has no end of its own, so its run gets a finish button where the locked pill was,
-                // well away from restart, which discards the run.
-                child: zen
+                // Finish saves practice; the separate restart action discards it.
+                child: running
                     ? TextButton.icon(
                         onPressed: practice.finish,
                         icon: Icon(Icons.stop_rounded, color: z.main),
@@ -104,9 +100,33 @@ class ModeBar extends ConsumerWidget {
               ),
             ),
             IconButton(
-              tooltip: 'restart',
+              tooltip: running ? 'restart and discard this run' : 'restart',
               icon: Icon(Icons.refresh, color: z.muted),
-              onPressed: () => ref.read(practiceProvider).restart(),
+              onPressed: () async {
+                if (running) {
+                  final discard = await showDialog<bool>(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Discard this run?'),
+                      content: const Text(
+                        'Restart begins a new run without saving this one. Use finish to save your practice. The timer continues while this dialog is open.',
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, false),
+                          child: const Text('Keep practicing'),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, true),
+                          child: const Text('Discard and restart'),
+                        ),
+                      ],
+                    ),
+                  );
+                  if (discard != true) return;
+                }
+                practice.restart();
+              },
             ),
           ],
         ),

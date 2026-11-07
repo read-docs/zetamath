@@ -36,6 +36,7 @@ void main() {
   test('replays the seeded problem sequence and auto-advances on a correct answer', () {
     final rng = createRng('loop');
     final first = generateProblem(defaultRanges, rng);
+    c.begin();
     expect(c.problem, first);
     solve();
     expect(c.problem, generateProblem(defaultRanges, rng, previousId: first.id));
@@ -43,8 +44,14 @@ void main() {
     expect(c.input, '');
   });
 
-  test('starts the clock on the first digit and times each solve from the previous one', () {
+  test('hides the first problem until begin and includes its full solve time', () {
     expect(c.running, isFalse);
+    expect(c.problem, isNull);
+    expect(c.ready, isTrue);
+    now += 10000;
+    c.press(KeypadKey.digit(1), at: now);
+    expect(c.running, isFalse);
+    c.begin();
     final firstDigits = c.problem!.answer.toString().length;
     solve(gapMs: 250);
     expect(c.running, isTrue);
@@ -52,14 +59,26 @@ void main() {
     solve(gapMs: 400);
     c.finish(at: now);
     final r = finished.single;
-    expect(r.logs.map((l) => l.timeMs), [250.0 * (firstDigits - 1), 400.0 * secondDigits]);
-    expect(r.elapsedMs, 250.0 * (firstDigits - 1) + 400.0 * secondDigits);
+    expect(r.logs.map((l) => l.timeMs), [250.0 * firstDigits, 400.0 * secondDigits]);
+    expect(r.elapsedMs, 250.0 * firstDigits + 400.0 * secondDigits);
     expect(r.seed, 'loop');
+  });
+
+  test('a lifecycle finish after the deadline caps elapsed time', () {
+    settings = settings.copyWith(mode: TestMode.time, duration: 10);
+    c.restart();
+    c.begin();
+    now += 20000;
+    c.finish();
+    expect(finished.single.elapsedMs, 10000);
+    c.finish();
+    expect(finished, hasLength(1));
   });
 
   test('a count test ends on the last answer', () {
     settings = settings.copyWith(mode: TestMode.count, count: 3);
     c.restart();
+    c.begin();
     for (var i = 0; i < 3; i++) {
       solve();
     }
@@ -72,6 +91,7 @@ void main() {
   test('a time test ends at exactly its duration, even when the frame comes late', () {
     settings = settings.copyWith(mode: TestMode.time, duration: 15);
     c.restart();
+    c.begin();
     c.press(KeypadKey.digit(1), at: now);
     final start = now;
     now += 14999;
@@ -87,6 +107,7 @@ void main() {
   test('a tap after time ran out finishes instead of scoring', () {
     settings = settings.copyWith(mode: TestMode.time, duration: 15);
     c.restart();
+    c.begin();
     c.press(KeypadKey.digit(1), at: now);
     c.press(KeypadKey.clear, at: now);
     now += 16000;
@@ -96,6 +117,7 @@ void main() {
   });
 
   test('wrong digits wait for backspace or clear', () {
+    c.begin();
     final answer = c.problem!.answer.toString();
     final wrong = (int.parse(answer[0]) + 1) % 10;
     c.press(KeypadKey.digit(wrong), at: now);
@@ -112,6 +134,7 @@ void main() {
   test('a drill cycles through the given problems and is marked as a drill', () {
     final drill = [Problem.make(Operation.add, 2, 3), Problem.make(Operation.multiply, 4, 5)];
     c.restart(drill: drill);
+    c.begin();
     expect(c.problem, drill[0]);
     solve();
     expect(c.problem, drill[1]);
@@ -121,9 +144,19 @@ void main() {
     expect(finished.single.drill, isTrue);
   });
 
-  test('finishing before the first digit saves nothing', () {
+  test('finishing before begin saves nothing', () {
     c.finish(at: now);
     expect(finished, isEmpty);
+  });
+
+  test('single-digit count goal includes thinking time', () {
+    settings = settings.copyWith(mode: TestMode.count, count: 1);
+    c.restart(drill: [Problem.make(Operation.add, 2, 3)]);
+    c.begin();
+    now += 2000;
+    c.press(const KeypadKey.digit(5), at: now);
+    expect(finished.single.elapsedMs, 2000);
+    expect(finished.single.logs.single.timeMs, 2000);
   });
 
   test('reports invalid ranges instead of a problem', () {

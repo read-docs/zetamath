@@ -31,6 +31,9 @@ class ResultsView extends ConsumerWidget {
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
             children: [
               Text('A little sharper.', style: TextStyle(color: z.text, fontSize: 24)),
+              Text(r.statusLabel, style: TextStyle(color: z.sub)),
+              if (!r.isCompletedRun && !r.isDrill && r.mode != TestMode.zen)
+                const Text('Saved as practice. Interrupted tests do not count toward personal bests or pace trends.'),
               if (personalBest)
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
@@ -47,7 +50,7 @@ class ResultsView extends ConsumerWidget {
                 children: [
                   for (final tile in [
                     StatTile(label: 'solved', value: '${solves.length}'),
-                    StatTile(label: 'pace', value: '${r.pace.round()} ppm'),
+                    StatTile(label: 'pace', value: '${r.pace.round()} ppm', note: 'problems per minute'),
                     StatTile(label: 'time', value: '${seconds(r.elapsedMs)}s'),
                     StatTile(
                       label: 'variation',

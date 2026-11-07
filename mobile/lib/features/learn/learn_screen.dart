@@ -3,6 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../themes/themes.dart';
+import '../../engine/generator.dart';
+import '../../store/history.dart';
+import '../../store/settings.dart';
 import '../practice/practice_providers.dart';
 import 'lessons.dart';
 
@@ -67,12 +70,29 @@ class _LearnScreenState extends ConsumerState<LearnScreen> {
         const SizedBox(height: 16),
         FilledButton.icon(
           icon: const Icon(Icons.play_arrow),
-          label: const Text('Start practicing'),
+          label: Text('Practice ${lesson.title.toLowerCase()}'),
           onPressed: () {
+            final op = Operation.values[_topic];
+            ref
+                .read(settingsProvider.notifier)
+                .update(
+                  (s) => s.copyWith(
+                    mode: TestMode.zen,
+                    ranges: RangeConfig({
+                      for (final candidate in Operation.values)
+                        candidate: s.ranges[candidate].copyWith(
+                          enabled: candidate == op,
+                          weight: candidate == op ? 1 : s.ranges[candidate].weight,
+                        ),
+                    }),
+                  ),
+                );
             ref.read(practiceProvider).restart();
             ref.read(tabProvider.notifier).go(AppTab.practice);
           },
         ),
+        const SizedBox(height: 12),
+        const Text('Opens free practice for this operation using your current number ranges.'),
         const SizedBox(height: 12),
         const Text(
           'Further reading is linked on each card. Explanations and worked examples are written for Zetamath.',

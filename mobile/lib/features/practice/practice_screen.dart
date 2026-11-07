@@ -76,7 +76,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> with SingleTick
                 height: math.min(4 * 72 + 3 * 8, MediaQuery.sizeOf(context).height * .42),
                 child: Keypad(
                   layout: s.keypadLayout,
-                  enabled: _practice.problem != null,
+                  enabled: _practice.running && _practice.problem != null,
                   onKey: (key) => _practice.press(key, at: clock()),
                 ),
               ),
@@ -111,13 +111,25 @@ class _Stage extends StatelessWidget {
       child: Text.rich(
         TextSpan(children: spans),
         maxLines: 1,
-        textScaler: TextScaler.noScaling,
         style: TextStyle(fontSize: size, color: z.text),
       ),
     );
 
     final Widget body;
-    if (problemText == null) {
+    if (practice.ready) {
+      body = Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FilledButton.icon(
+            onPressed: practice.begin,
+            icon: const Icon(Icons.play_arrow),
+            label: const Text('Start practice'),
+          ),
+          const SizedBox(height: 12),
+          const Text('The first problem appears when the timer starts.', textAlign: TextAlign.center),
+        ],
+      );
+    } else if (problemText == null) {
       body = Text(
         practice.error ?? 'configure your ranges',
         textAlign: TextAlign.center,
@@ -127,6 +139,7 @@ class _Stage extends StatelessWidget {
       body = Semantics(
         label: '$problemText equals ${answer.isEmpty ? 'blank' : answer}',
         excludeSemantics: true,
+        liveRegion: true,
         child: line([
           TextSpan(text: '${problem!.a}'),
           gap,
@@ -146,6 +159,7 @@ class _Stage extends StatelessWidget {
       body = Semantics(
         label: '$problemText, answer ${answer.isEmpty ? 'blank' : answer}',
         excludeSemantics: true,
+        liveRegion: true,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -193,7 +207,7 @@ class _Stage extends StatelessWidget {
             height: 32,
             child: practice.running
                 ? null
-                : Text('tap a digit to start', style: TextStyle(color: z.muted, fontSize: 14)),
+                : Text('start when you are ready', style: TextStyle(color: z.muted, fontSize: 14)),
           ),
         ],
       ),

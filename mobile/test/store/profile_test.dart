@@ -3,6 +3,7 @@ import 'package:zetamath/engine/generator.dart';
 import 'package:zetamath/store/difficulty.dart';
 import 'package:zetamath/store/history.dart';
 import 'package:zetamath/store/profile.dart';
+import 'package:zetamath/store/settings.dart';
 
 import '../fixtures.dart';
 
@@ -35,6 +36,24 @@ void main() {
   test('summary totals', () {
     expect(summary(results).toJson(), f['summary']);
     expect(summary([]).toJson(), f['emptySummary']);
+  });
+
+  test('pace trends compare completed runs with matching settings', () {
+    final complete = results.firstWhere((r) => r.isScoredRun);
+    final settings = defaultSettings.copyWith(
+      mode: complete.mode,
+      customKind: complete.customKind,
+      duration: complete.duration,
+      count: complete.count,
+      ranges: complete.ranges,
+    );
+    final matching = results.where((r) => r.isScoredRun && resultKey(r) == resultKey(complete)).toList();
+    expect(profilePaceSeries(results, settings: settings).length, matching.length);
+    expect(summary(results).tests, results.where((r) => r.isScoredRun).length);
+    expect(
+      summary(results, settings: settings).highestPace,
+      matching.map((r) => r.pace).reduce((a, b) => a > b ? a : b),
+    );
   });
 
   test('best result per standard length for the given ranges', () {

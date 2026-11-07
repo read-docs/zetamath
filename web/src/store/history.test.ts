@@ -67,6 +67,14 @@ describe('history persistence', () => {
     expect(save.mock.calls.at(-1)?.[0]).toEqual(store.getState().results);
   });
 
+  it('rejects oversized imports before loading or writing storage', async () => {
+    const load = vi.fn(), save = vi.fn();
+    const store = createHistoryStore({load, save});
+    await expect(store.getState().importJSON(' '.repeat(25 * 1024 * 1024 + 1))).rejects.toThrow('too large');
+    expect(load).not.toHaveBeenCalled();
+    expect(save).not.toHaveBeenCalled();
+  });
+
   it('continues processing after a failed mutation', async () => {
     const save = vi.fn().mockRejectedValueOnce(new Error('full')).mockResolvedValue(undefined);
     const store = createHistoryStore({load: async () => [result('a')], save});

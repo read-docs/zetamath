@@ -43,9 +43,12 @@ class StatusLine extends StatelessWidget {
           return Column(
             children: [
               SizedBox(
-                height: 36,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                width: double.infinity,
+                child: Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  crossAxisAlignment: WrapCrossAlignment.end,
+                  spacing: 12,
+                  runSpacing: 8,
                   children: [
                     if (showTimer && config.mode != TestMode.zen || showTimer && running)
                       Semantics(
@@ -61,7 +64,6 @@ class StatusLine extends StatelessWidget {
                           ),
                         ),
                       ),
-                    const Spacer(),
                     if (running && showPace) Text('${ppm(score, ms).round()} ppm   ', style: small),
                     if (running && showScore)
                       Semantics(

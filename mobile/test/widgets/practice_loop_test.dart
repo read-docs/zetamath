@@ -17,6 +17,8 @@ void main() {
       clock: clock,
       settings: defaultSettings.copyWith(mode: TestMode.count, count: 3, seed: 'widget'),
     );
+    await tester.tap(find.text('Start practice'));
+    await tester.pump();
     final rng = createRng('widget');
     Problem? previous;
     for (var i = 0; i < 3; i++) {
@@ -38,7 +40,7 @@ void main() {
 
     await tester.tap(find.text('try again'));
     await tester.pumpAndSettle();
-    expect(find.text('tap a digit to start'), findsOneWidget);
+    expect(find.text('start when you are ready'), findsOneWidget);
   });
 
   testWidgets('a timed test counts down on the ticker and ends by itself', (tester) async {
@@ -49,6 +51,8 @@ void main() {
       settings: defaultSettings.copyWith(mode: TestMode.time, duration: 15, seed: 'widget'),
     );
     expect(find.text('15 s left', findRichText: true), findsOneWidget);
+    await tester.tap(find.text('Start practice'));
+    await tester.pump();
     await tester.tap(find.byKey(const ValueKey('keypad-1')));
     clock.now += 4200;
     await tester.pump(const Duration(milliseconds: 16));
@@ -66,6 +70,8 @@ void main() {
       clock: FakeClock(),
       settings: defaultSettings.copyWith(focusMode: false, seed: 'widget'),
     );
+    await tester.tap(find.text('Start practice'));
+    await tester.pump();
     await tester.tap(find.byKey(const ValueKey('keypad-1')));
     await tester.pump();
     expect(container.read(practiceProvider).running, isTrue);
@@ -81,6 +87,8 @@ void main() {
       clock: FakeClock(),
       settings: defaultSettings.copyWith(mode: TestMode.zen, focusMode: true, seed: 'widget'),
     );
+    await tester.tap(find.text('Start practice'));
+    await tester.pump();
     await tester.tap(find.byKey(const ValueKey('keypad-1')));
     await tester.pump();
     expect(container.read(practiceProvider).running, isTrue);
@@ -106,6 +114,8 @@ void main() {
       settings: defaultSettings.copyWith(mode: TestMode.zen, focusMode: true, seed: 'widget'),
     );
     expect(find.text('finish'), findsNothing);
+    await tester.tap(find.text('Start practice'));
+    await tester.pump();
     await tester.tap(find.byKey(const ValueKey('keypad-1')));
     await tester.pump();
     await tester.tap(find.text('finish'));
@@ -131,15 +141,19 @@ void main() {
       clock: FakeClock(),
       settings: defaultSettings.copyWith(seed: 'widget'),
     );
+    await tester.tap(find.text('Start practice'));
+    await tester.pump();
     await tester.tap(find.byKey(const ValueKey('keypad-1')));
     await tester.pump();
-    await tester.tap(find.byTooltip('test settings'), warnIfMissed: false);
+    expect(find.byTooltip('test settings'), findsNothing);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
     expect(find.text('difficulty'), findsNothing);
     expect(container.read(settingsProvider).mode, TestMode.time);
     expect(container.read(practiceProvider).running, isTrue);
-    await tester.tap(find.byTooltip('restart'));
+    await tester.tap(find.byTooltip('restart and discard this run'));
+    await tester.pump(const Duration(milliseconds: 300));
+    await tester.tap(find.text('Discard and restart'));
     await tester.pump();
     expect(container.read(practiceProvider).running, isFalse);
     expect(container.read(historyProvider).results, isEmpty);

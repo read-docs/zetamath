@@ -20,7 +20,7 @@ describe('profile', () => {
   });
   it('summarises totals and leaves drills out of pace', () => {
     const s = summary([result('a', at(2026,11,5), 10), result('b', at(2026,11,6), 20, {drill: true})]);
-    expect(s).toMatchObject({tests: 2, solved: 30, timeMs: 30000, highestPace: 40, averagePace: 40, joined: at(2026,11,5)});
+    expect(s).toMatchObject({tests: 1, solved: 30, timeMs: 30000, highestPace: 40, averagePace: 40, joined: at(2026,11,5)});
   });
   it('keeps the best run per length for the given ranges only', () => {
     const easy = difficultyRanges('easy', defaultRanges);
@@ -35,6 +35,22 @@ describe('profile', () => {
   it('builds an oldest-first pace series with trailing averages', () => {
     const series = paceSeries([result('b', at(2026,11,6), 20), result('a', at(2026,11,5), 10)]);
     expect(series.map(p => [p.ppm, p.average10, p.average100])).toEqual([[40, 40, 40], [80, 60, 60]]);
+  });
+  it('excludes incomplete, zen, drill and zero-time runs from scored progress', () => {
+    const valid = result('valid', at(2026,11,5));
+    const runs = [valid, result('partial', at(2026,11,6), 1, {elapsedMs: 1}),
+      result('zen', at(2026,11,6), 20, {mode: 'zen'}),
+      result('drill', at(2026,11,6), 20, {drill: true}),
+      result('zero', at(2026,11,6), 1, {mode: 'count', count: 1, elapsedMs: 0})];
+    expect(summary(runs)).toMatchObject({tests: 1, highestPace: 40, solved: 52});
+    expect(paceSeries(runs)).toHaveLength(1);
+  });
+  it('compares only matching test settings without hiding lifetime practice totals', () => {
+    const normal = result('normal', at(2026,11,5));
+    const easy = result('easy', at(2026,11,6), 30, {ranges: difficultyRanges('easy', defaultRanges)});
+    const longer = result('longer', at(2026,11,6), 40, {duration: 30, elapsedMs: 30000});
+    expect(summary([easy, longer, normal], normal)).toMatchObject({tests: 3, solved: 80, averagePace: 40});
+    expect(paceSeries([easy, longer, normal], normal).map(p => p.ppm)).toEqual([40]);
   });
   it('levels up on a growing xp curve', () => {
     expect(level([])).toEqual({level: 1, xp: 0, into: 0, needed: 100});

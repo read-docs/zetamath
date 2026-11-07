@@ -74,6 +74,7 @@ class SettingsScreen extends ConsumerWidget {
       try {
         final files = await FilePicker.pickFiles(type: FileType.any);
         if (files.isEmpty) return;
+        if (await files.first.xFile.length() > maxHistoryImportBytes) throw HistoryImportSizeError();
         final count = await ref.read(historyProvider.notifier).importJson(await files.first.xFile.readAsString());
         message('Imported $count results.');
       } catch (e) {

@@ -44,6 +44,15 @@ class Result {
 
   bool get isDrill => drill ?? false;
   bool get isCountRun => mode == TestMode.count || (mode == TestMode.custom && customKind == CustomKind.count);
+  bool get isCompletedRun => mode != TestMode.zen && (isCountRun ? logs.length >= count : elapsedMs >= duration * 1000);
+  bool get isScoredRun => !isDrill && isCompletedRun && elapsedMs > 0 && logs.isNotEmpty;
+  String get statusLabel => isDrill
+      ? 'drill'
+      : mode == TestMode.zen
+      ? 'free practice'
+      : isCompletedRun
+      ? 'completed'
+      : 'interrupted';
   double get pace => elapsedMs > 0 ? logs.length * 60000 / elapsedMs : 0;
 
   Result copyWith({List<Solve>? logs}) => Result(
@@ -203,10 +212,7 @@ bool _better(Result a, Result b) => a.isCountRun ? a.elapsedMs < b.elapsedMs : a
 List<Result> personalBests(Iterable<Result> results) {
   final best = <String, Result>{};
   for (final r in results) {
-    if (r.isDrill || r.mode == TestMode.zen || r.logs.isEmpty) continue;
-    if (r.isCountRun ? r.logs.length < r.count : r.elapsedMs < r.duration * 1000) {
-      continue;
-    }
+    if (!r.isScoredRun) continue;
     final key = resultKey(r), previous = best[key];
     if (previous == null || _better(r, previous)) best[key] = r;
   }

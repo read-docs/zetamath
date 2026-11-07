@@ -39,11 +39,12 @@ A change to the web engine or stores needs new fixtures: run `npm run fixtures` 
 
 ## Differences from web
 
+- Tap **Start practice** to reveal the first problem and start timing together.
 - A keypad replaces the keyboard. Digits register on touch down, so solve times don't include lifting the finger.
-- Restart is a button in the mode bar and under results. The tune button opens quick settings in place of Esc.
+- Finish saves the current run; restart asks before discarding an active run. The mode pill opens quick settings before a run.
 - Leaving the app or switching tabs ends a running test. It is saved, but unfinished tests never count as personal bests.
 - Extra settings: haptics, keypad layout (phone or calculator) and a fixed seed.
 
 ## Learn
 
-The Learn tab includes the same twelve techniques as the web page, grouped by operation, with worked examples and expandable solutions. Lessons work offline; source links open in your browser. Content lives in `lib/features/learn/lessons.dart` and mirrors `web/src/content/lessons.ts`.
+The Learn tab includes the same twelve techniques as the web page, grouped by operation, with worked examples and expandable solutions. Lessons work offline; source links open in your browser. Each topic opens free practice for that operation using your current ranges. Content lives in `lib/features/learn/lessons.dart` and mirrors `web/src/content/lessons.ts`.
